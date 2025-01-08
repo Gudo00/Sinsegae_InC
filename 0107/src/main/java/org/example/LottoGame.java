@@ -104,7 +104,7 @@ public class LottoGame {
                     System.out.println(i + 1 + "번째 복권 1등 당첨! 🎉");
                     break;
                 default:
-                    System.out.println(i + 1 + "꽝");
+                    System.out.println(i + "꽝 😢");
                     break;
             }
         }
