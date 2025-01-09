@@ -2,11 +2,14 @@ package org.example.knn;
 
 public class Point {
 
-    String type; // J/Z
-    int xpos;
-    int ypos;
+    public String type; // J/Z
+    public int xpos;
+    public int ypos;
 
     public Point(String type, int xpos, int ypos) {
+
+        System.out.println("AAAA");
+
         this.type = type;
         this.xpos = xpos;
         this.ypos = ypos;
