@@ -1,17 +1,18 @@
 package org.example.kiosk.menu;
 
+import lombok.extern.log4j.Log4j2;
+
 import java.util.ArrayList;
 
+@Log4j2
 public enum MenuService {
 
     INSTANCE;
 
     private ArrayList<Menu> menus;
 
-    // 주어진 메뉴 데이터들을 제공하는 기능
-
-    // 초기화
-    private MenuService() {
+    //초기화
+    MenuService() {
         this.menus = new ArrayList<>();
         menus.add(new Menu(1, "Americano", 3000));
         menus.add(new Menu(2, "Latte", 3500));
@@ -19,10 +20,13 @@ public enum MenuService {
         menus.add(new Menu(4, "Espresso", 2500));
     }
 
-    private ArrayList<Menu> getList(){
-        return menus;
-    };
+    public ArrayList<Menu> getList(){
 
+        log.info("getList...called" );
+        log.info(menus);
+
+        return menus;
+    }
 
 
 }

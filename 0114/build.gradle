@@ -12,8 +12,22 @@ repositories {
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    // https://mvnrepository.com/artifact/org.projectlombok/lombok
     compileOnly 'org.projectlombok:lombok:1.18.36'
     annotationProcessor 'org.projectlombok:lombok:1.18.36'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.36'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.36'
+
+    implementation 'org.apache.logging.log4j:log4j-core:2.20.0'
+    implementation 'org.apache.logging.log4j:log4j-api:2.20.0'
+
+    // 선택적으로 SLF4J 브리지 추가 (다른 로깅 프레임워크와 호환성)
+    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.20.0'
+
+    // 테스트 로깅에 사용
+    testImplementation 'org.apache.logging.log4j:log4j-core:2.20.0'
 }
 
 test {

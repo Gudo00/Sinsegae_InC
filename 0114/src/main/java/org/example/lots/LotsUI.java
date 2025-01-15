@@ -8,6 +8,7 @@ public class LotsUI {
 
         Scanner scanner = new Scanner(System.in);
 
+
         while(true){
             System.out.println("마음의 준비를 하시고 Enter");
             scanner.nextLine();

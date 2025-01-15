@@ -15,10 +15,5 @@ public class Tile {
         this.num = num;
     }
 
-
-
-    /* public int getNum() {
-        return num;
-    } */ //Getter
 }
 
