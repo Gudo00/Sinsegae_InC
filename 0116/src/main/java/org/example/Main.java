@@ -1,29 +1,39 @@
 package org.example;
 
 import org.example.menu.*;
-import org.example.store.BasicRes;
-import org.example.store.BusanRes;
-import org.example.store.DaeguRes;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import org.example.store.*;
+import org.jsoup.*;
 
 import java.util.*;
 
 public class Main {
     public static void main(String[] args)throws Exception {
 
-        HashMap<String, MenuService> map = new HashMap<>();
+        List<LottoBall> balllist = new ArrayList<>(); // List로 타입을 잡아서 Array, Liked 듈 다 포함. 현재는 Array라 끝에 선언.
 
-        map.put("mega", new MegaMenuService());
-        map.put("compose", new ComposeMenuService());
+        for (int i = 1; i <= 45; i++){ // 번호 1 ~ 45 넣기
+            balllist.add(new LottoBall(i));
+        }
 
-        MenuService menuService = map.get("mega");
-        menuService.getMenuList();
+        Collections.shuffle(balllist); // 섞기
+
+        List<LottoBall> result = balllist.subList(0,6);// 0부터 6까지 끊기
+
+        result.sort((z1, z2) -> z1.getNum() - z2.getNum()); // 람다식. 정렬
+
+        System.out.println(result);
 
 
-String url = "https://www.mega-mgccoffee.com/menu/menu.php?menu_category1=1&menu_category2=1&category=&list_checkbox_all=all";
+//        HashMap<String, MenuService> map = new HashMap<>();
+//
+//        map.put("mega", new MegaMenuService());
+//        map.put("compose", new ComposeMenuService());
+//
+//        MenuService menuService = map.get("mega");
+//        menuService.getMenuList();
+//
+//
+//        String url = "https://www.mega-mgccoffee.com/menu/menu.php?menu_category1=1&menu_category2=1&category=&list_checkbox_all=all";
 //        Document doc = Jsoup.connect(url).get();
 //
 ////      System.out.println(doc);
@@ -53,7 +63,6 @@ String url = "https://www.mega-mgccoffee.com/menu/menu.php?menu_category1=1&menu
 //        HashMap<String,BasicRes> resHashMap = new HashMap<>();
 //
 //        Menu m = new Coffee();
-//
 
 //        resHashMap.put("서울", new BasicRes());
 //        resHashMap.put("부산", new BusanRes());
