@@ -29,8 +29,10 @@ public class HttpFTServer {
             outputStream.write("HTTP/1.1 200 OK\r\n".getBytes());
 //            outputStream.write("Content-Type: image/jpg;\r\n".getBytes());
             outputStream.write("Content-Type: video/mp4;\r\n".getBytes());
+
 //            outputStream.write("Content-Length: 10651\r\n".getBytes());
             outputStream.write("Content-Length: 23710005\r\n".getBytes());
+
             outputStream.write("\r\n".getBytes()); // 공백 넣기
 
             // 5. 파일 데이터를 읽어서 OutputStream에 write( )한다.  ** byte[]를 이용하면 1000배 빨라짐 **
