@@ -15,7 +15,7 @@ public class LottoServer {
             OutputStream outputStream = socket.getOutputStream();
 
             Set<Integer> ballSet = new HashSet<>(); // 중복 제거
-            
+
             while (ballSet.size() < 6) {
                 int rdm = (int)(Math.random()*45) + 1; // 1 ~ 45
                 ballSet.add(rdm);
