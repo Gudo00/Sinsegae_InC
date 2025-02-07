@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONTACT</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="contact.css" type="text/css">
+</head>
+<body>
+    <header class="header" style="background-image: url(/img/egg.jpg);">
+        <div class="header__wrap">
+            <img class="header__logo" src="/img/brand-ico.png">
+            <!-- navbar 메뉴 -->
+            <nav class="header__nav">
+                <a onclick="location.href='index.HTML'" class="header__nav--item">HOME</a>
+                <a style="color:white" onclick="location.href='about.HTML'" class="header__nav--item">ABOUT</a>
+                <a style="color:white" onclick="location.href='menu.HTML'" class="header__nav--item">MENU</a>
+                <a style="color:#f39c12" onclick="location.href='contact.HTML'" class="header__nav--item">CONTACT</a>
+            </nav>
+        </div>
+        <div style="height: 300px">
+        </div>
+        <div class="header__wrap">
+            <div class="header__bottom">
+                <h2 class="header__bottom--day">CONTACT</h2>
+                <h2 class="header__bottom--time">JIHEE BREAKFAST</h2>
+            </div>
+        </div>
+    </header>
+    <div class="contact">
+        <div class="contact-temp__top"></div>
+        <!-- contact 내용 -->
+        <div class="contact-wrap">
+            <div class="contact-info">
+                <div class="contact-info__item">
+                    <img src="/img/img-contact/location.png" alt="icon-location">
+                    <h2>ADDRESS</h2>
+                    <p>225 Liberty St, 4th Fl.</p>
+                    <p>New York, NY 10281</p>
+                </div>
+                <div class="contact-info__item">
+                    <img src="/img/img-contact/mail.png" alt="icon-email">
+                    <h2>EMAIL</h2>
+                    <p>hello@company.com</p>
+                    <p>suport@company.com</p>
+                </div>
+                <div class="contact-info__item">
+                    <img src="/img/img-contact/call.png" alt="icon-call">
+                    <h2>CALL US</h2>
+                    <p>1 (234) 567-891</p>
+                    <p>1 (234) 567-891</p>
+                </div>
+            </div>
+            <!-- contact 지도 -->
+            <div class="contact-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12651.850218086283!2d126.95480753955076!3d37.555946000000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca266e3947003%3A0xe7be97c172b7af6a!2z7ISc7Jq47Jet!5e0!3m2!1sko!2skr!4v1676538471924!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+        <div class="contact-temp__bottom"></div>
+    </div>
+    <!-- 기본footer -->
+    <footer class="footer">
+        <div class="footer-wrap">
+            <!-- SNS 링크 아이콘 -->
+            <div class="footer-SNS">
+                <a href="https://twitter.com/?lang=ko">
+                    <img src="/img/twitter-ico.png" alt="twitter" />
+                </a>
+                <a href="https://www.youtube.com/">
+                    <img src="/img/yt-ico.png" alt="youtube" />
+                </a>
+                <a href="https://www.instagram.com/">
+                    <img src="/img/insta-ico.png" alt="instagram" />
+                </a>
+                <a href="https://kr.linkedin.com/">
+                    <img src="/img/linkedin-ico.png" alt="linkedin" />
+                </a>
+            </div>
+            <div class="footer-contact">
+                <h2 class="footer-contact__title">CONTACT US</h2>
+                <p class="footer-contact__content">225 Liberty St, 4th Fl.</p>
+                <p class="footer-contact__content">New York, NY 10281</p>
+                <p class="footer-contact__content">010-8608-8219</p>
+                <p class="footer-contact__content">JIHEE HAN</p>
+            </div>
+            <!-- GET IN TOUCH -->
+            <div class="footer-form">
+                <h2 class="footer-form__title">GET IN TOUCH</h2>
+                <form class="footer-form__wrap">
+                <div class="form__wrap--row">
+                    <textarea
+                    rows="1"
+                    cols="30"
+                    class="row--name"
+                    name="name"
+                    placeholder="NAME"
+                    ></textarea
+                    ><br />
+                </div>
+                <div class="form__wrap--row">
+                    <textarea
+                    rows="1"
+                    cols="30"
+                    class="row--email"
+                    name="email"
+                    placeholder="EMAIL"
+                    ></textarea
+                    ><br />
+                </div>
+                <div class="form__wrap--row">
+                    <textarea
+                    class="row--message"
+                    name="message"
+                    rows="7"
+                    cols="30"
+                    placeholder="MESSAGE"
+                    ></textarea
+                    ><br />
+                </div>
+                <button onclick="location.href='contact.html'">send</button>
+                </form>
+            </div>
+        </div>
+        <!-- 이용약관 -->
+        <div class="footer-bottom">
+            <div class="footer-bottom__terms" style="color: white">
+                <a onclick="location.href='../policymenu/terms.html'">Terms</a>
+                <span>|</span>
+                <a onclick="location.href='../policymenu/privacy.html'">Privacy</a>
+                <span>|</span>
+                <a onclick="location.href='../policymenu/conduct.html'">Code of Conduct</a>
+                <span>|</span>
+                <a onclick="location.href='../policymenu/access.html'">Accessibility Policy</a>
+            </div>
+            <div class="footer-bottom__copyright">
+                <span>Copyright ©2023 JIHEE BREAKFAST®. All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

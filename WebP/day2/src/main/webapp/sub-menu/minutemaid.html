@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MENU-ORANGE JUICE</title>
+<link rel="stylesheet" href="/style.css" type="text/css" />
+<link rel="stylesheet" href="/sub-menu/menu-sub.css" type="text/css" />
+</head>
+<body>
+    <header class="header" style="background-image: url(/img/rice.jpg)">
+        <div class="header__wrap">
+            <img class="header__logo" src="/img/brand-ico.png" />
+            <!-- nav-bar 메뉴 -->
+            <nav class="header__nav">
+                <a onclick="location.href='/index.HTML'" class="header__nav--item"
+                >HOME</a
+                >
+                <a
+                style="color: white"
+                onclick="location.href='/about.HTML'"
+                class="header__nav--item"
+                >ABOUT</a
+                >
+                <a
+                style="color: #f39c12"
+                onclick="location.href='/menu.HTML'"
+                class="header__nav--item"
+                >MENU</a
+                >
+                <a onclick="location.href='/contact.HTML'" class="header__nav--item"
+                >CONTACT</a
+                >
+            </nav>
+        </div>
+        <div style="height: 300px"></div>
+        <div class="header__wrap">
+            <div class="header__bottom">
+                <h2 class="header__bottom--day">JIHEE BREAKFAST'S</h2>
+                <h2 class="header__bottom--time">ORANGE JUICE</h2>
+            </div>
+        </div>
+    </header>
+<div class="submenu-container">
+    <div class="submenu-background">
+    <div class="submenu-flexbox">
+        <div class="submenu-info">
+            <!-- 오렌지 주스 이미지 -->
+        <img
+            class="submenu-img square-thumb"
+            src="/img/img-menu/orange.jpg"
+            alt=""
+        />
+        <!-- 오렌지 주스 메뉴 소개 -->
+        <h2>JIHEE BREAKFAST'S ORANGE JUICE</h2>
+        <p>
+            Start your day off right with the refreshing taste of our fresh-squeezed orange juice. Made from the finest, juiciest oranges, our juice is bursting with vitamin C and natural sweetness. Whether you're enjoying it as part of a healthy breakfast or as a pick-me-up during the day, 
+        </p>
+        <p style="padding: 20px 0;">
+            Our orange juice is the perfect way to quench your thirst and boost your energy. Plus, with no added sugars or preservatives, you can feel good about indulging in our juice every day.
+        </p>
+        <div class="submenu-btn">
+            <a
+            href="#"
+            class="submenu-btn"
+            onclick="location.href='waffle.HTML'"
+            >
+            <img
+                src="/img/img-menu/forward-btn.png"
+                style="rotate: 180deg"
+            />
+            </a>
+            <a
+            href="#"
+            class="submenu-btn"
+            onclick="location.href='pancake.HTML'"
+            >
+            <img src="/img/img-menu/forward-btn.png" />
+            </a>
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+<!-- 기본 footer -->
+<footer class="footer">
+    <div class="footer-wrap">
+        <!-- SNS 링크 아이콘 -->
+        <div class="footer-SNS">
+            <a href="https://twitter.com/?lang=ko">
+                <img src="/img/twitter-ico.png" alt="twitter" />
+            </a>
+            <a href="https://www.youtube.com/">
+                <img src="/img/yt-ico.png" alt="youtube" />
+            </a>
+            <a href="https://www.instagram.com/">
+                <img src="/img/insta-ico.png" alt="instagram" />
+            </a>
+            <a href="https://kr.linkedin.com/">
+                <img src="/img/linkedin-ico.png" alt="linkedin" />
+            </a>
+        </div>
+        <div class="footer-contact">
+            <h2 class="footer-contact__title">CONTACT US</h2>
+            <p class="footer-contact__content">225 Liberty St, 4th Fl.</p>
+            <p class="footer-contact__content">New York, NY 10281</p>
+            <p class="footer-contact__content">010-8608-8219</p>
+            <p class="footer-contact__content">JIHEE HAN</p>
+        </div>
+        <!-- GET IN TOUCH -->
+        <div class="footer-form">
+            <h2 class="footer-form__title">GET IN TOUCH</h2>
+            <form class="footer-form__wrap">
+            <div class="form__wrap--row">
+                <textarea
+                rows="1"
+                cols="30"
+                class="row--name"
+                name="name"
+                placeholder="NAME"
+                ></textarea
+                ><br />
+            </div>
+            <div class="form__wrap--row">
+                <textarea
+                rows="1"
+                cols="30"
+                class="row--email"
+                name="email"
+                placeholder="EMAIL"
+                ></textarea
+                ><br />
+            </div>
+            <div class="form__wrap--row">
+                <textarea
+                class="row--message"
+                name="message"
+                rows="7"
+                cols="30"
+                placeholder="MESSAGE"
+                ></textarea
+                ><br />
+            </div>
+            <button onclick="location.href='contact.html'">send</button>
+            </form>
+        </div>
+    </div>
+    <!-- 이용약관 -->
+    <div class="footer-bottom">
+        <div class="footer-bottom__terms" style="color: white">
+            <a onclick="location.href='../policymenu/terms.html'">Terms</a>
+            <span>|</span>
+            <a onclick="location.href='../policymenu/privacy.html'">Privacy</a>
+            <span>|</span>
+            <a onclick="location.href='../policymenu/conduct.html'">Code of Conduct</a>
+            <span>|</span>
+            <a onclick="location.href='../policymenu/access.html'">Accessibility Policy</a>
+        </div>
+        <div class="footer-bottom__copyright">
+            <span>Copyright ©2023 JIHEE BREAKFAST®. All rights reserved.</span>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,201 @@
+%box {
+    padding: 20px 25px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+%intro{
+    background-color: rgba(0, 0, 0, 0.514);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    line-height: 100px;
+}
+.about {
+    min-width: 100%;
+    height:auto;
+    p {
+        padding-top: 30px;
+    }
+    &-header {
+        background-color: #f8e9d0;
+        &-juice {
+            width: 172px;
+            position: sticky;
+            float: right;
+            top: 100px;
+        }
+    }
+    &-second {
+        background-color: #fffbf3;
+    }
+    &-third {
+        background-color: #f8e9d0;
+    }
+    &-intro {
+        display: flex;
+        justify-content: center;
+        
+        &__text {
+            @extend %box;
+            width: 30%;
+            margin: 20px 10px;
+            h3, h2, p {
+                text-align: left;
+            }
+        }
+        &__img {
+            margin: 20px 0;
+            img{
+                width: 360px;
+            }
+        }
+    }
+}
+
+.about-ppl{
+    background-color: #424242;
+    color: white;
+    padding: 40px;
+
+        h2{
+        padding-bottom: 30px;
+        }
+        span{
+            color: #f39c12;
+        }
+}
+
+%pplimg {
+    background-position: center;
+    background-size: cover;
+    height: 300px;
+    width: auto;
+    background-repeat: no-repeat;
+    transition: all 0.3s linear;
+    -webkit-transition: .3s ease-in-out;
+
+}
+
+.about-ppl-wrap{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: repeat(3,1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    position: relative;
+    div{
+        &:hover{
+            cursor: pointer;
+            transform: scale(1.2);
+            z-index: 100;
+
+            }
+    }
+}
+
+@mixin job($height) {
+    background-color: rgba(0, 0, 0, 0.514);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: $height;
+    line-height: $height;
+}
+
+
+.about-ppl-ceo{
+    background-image: url(/img/img-about/ceo.jpg);
+    background-position: center;
+    background-size: cover;
+    grid-column: 1/3;
+    grid-row: 1/3;
+    position: relative;
+    transition: all 0.3s linear;
+    -webkit-transition: .3s ease-in-out;
+    h2{
+        @include job(100px);
+    }
+}
+
+.about-ppl__staff{
+    background-image: url(/img/img-about/waitress.jpg);
+    @extend %pplimg;
+    grid-column: 1/2;
+    grid-row: 3/4;
+    position: relative;
+    h2{
+        @include job(50px);
+    }
+}
+
+.about-ppl__chef {
+    background-image: url(/img/img-about/chef.jpg);
+    @extend %pplimg;
+    grid-column: 2/3;
+    grid-row: 3/4;
+    position: relative;
+    
+    h2{
+        @include job(50px);
+    }
+}
+
+.about-ppl__reception{
+    background-image: url(/img/img-about/receptionist.jpg);
+    @extend %pplimg;
+    grid-column: 4/5;
+    grid-row: 1/2;
+    position: relative;
+
+    h2{
+        @include job(50px);
+    }
+}
+
+.about-ppl__waiters{
+    background-image: url(/img/img-about/waiters.jpg);
+    @extend %pplimg;
+    grid-column: 3/5;
+    grid-row: 2/4;
+    width: auto;
+    height: auto;
+    position: relative;
+    h2{
+        @include job(100px);
+    }
+}
+.about-ppl__engineer{
+    background-image: url(/img/img-about/engineer.jpg);
+    @extend %pplimg;
+    grid-column:3/4;
+    grid-row: 1/2;
+    position: relative;
+
+    h2{
+        @include job(50px);
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px){
+    .about-intro{
+        display: inline-block;
+
+        &__text {
+            width: 100%;
+            margin: 0;
+        }
+    }
+    .about-header-juice {
+        width: 56px;;
+    }
+    .about-ppl-wrap{
+        display: flex;
+        flex-direction: column;
+            div{
+                width: 100%;
+                height: 300px;;
+            }
+        }
+}

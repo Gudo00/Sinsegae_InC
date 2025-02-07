@@ -1,0 +1,15 @@
+## 미디어쿼리에-1을 붙인 이유
+
+If your flexbox items are missing in the mobile viewport, there could be a few different reasons why. Here are some things you can check:
+
+Make sure you are using the appropriate CSS properties to make your items flex. In order to create a flex container, you should apply display: flex or display: inline-flex to the parent element, and use properties like flex-direction, justify-content, and align-items to control the layout of the items inside.
+
+Check that your flexbox items have appropriate widths and heights for the mobile viewport. Flexbox items will automatically stretch to fill the available space in the flex container, so if the container is not wide enough, the items may not appear as expected.
+
+Check that your flexbox items are not being hidden by other CSS rules, such as media queries or overflow properties. If you have set a maximum width for the container or are using overflow: hidden, this could cause your items to be hidden.
+
+Check that your flexbox items are not being pushed out of view by other content on the page. If there are other elements on the page that are overlapping or pushing your flexbox items out of the viewport, this could cause them to be hidden.
+
+Check that your flexbox items are not being hidden by other elements on the page with a higher z-index value. If you have set z-index values for other elements on the page, this could cause them to overlap your flexbox items and make them appear hidden.
+
+These are just a few possible reasons why your flexbox items may be missing in the mobile viewport. Without more information about your specific code and design, it's difficult to provide a more detailed answer.
