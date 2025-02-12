@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - 페이지를 찾을 수 없음</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: black;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            position: relative;
+        }
+
+        h1 {
+            font-size: 8rem;
+            text-shadow: 0 0 15px cyan, 0 0 30px blue;
+            animation: glow 1.5s infinite alternate;
+        }
+
+        p {
+            font-size: 1.5rem;
+            margin-top: -10px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            font-size: 1.2rem;
+            color: cyan;
+            text-decoration: none;
+            border: 2px solid cyan;
+            border-radius: 5px;
+            text-shadow: 0 0 10px cyan;
+            transition: all 0.3s ease-in-out;
+        }
+
+        a:hover {
+            background: cyan;
+            color: black;
+            box-shadow: 0 0 20px cyan;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px cyan, 0 0 20px blue;
+            }
+            to {
+                text-shadow: 0 0 20px cyan, 0 0 40px blue;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>404</h1>
+        <p>페이지를 찾을 수 없습니다.</p>
+        <a href="/todo/list">홈으로 돌아가기</a>
+    </div>
+</body>
+</html>
