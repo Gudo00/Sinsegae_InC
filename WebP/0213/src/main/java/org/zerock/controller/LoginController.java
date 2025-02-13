@@ -1,18 +1,12 @@
-package org.zerock.user.controller;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.zerock.cart.dto.CartItemDTO;
-import org.zerock.cart.service.CartService;
+package org.zerock.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  * Servlet implementation class LoginController
@@ -33,8 +27,8 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);
+		
+		request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
 		
 	}
 
@@ -42,31 +36,16 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		String uid = request.getParameter("uid");
+		//jakarta.servlet.http.Cookie
+		Cookie loginCookie = new Cookie("login", "AAA");
+		loginCookie.setMaxAge(60*60*24);
+		loginCookie.setPath("/");
 		
-		HttpSession session = request.getSession();
+		//응답 보낼때 response에 추가해 주어야 함 
+		response.addCookie(loginCookie);
 		
-		session.setAttribute("user", uid);
 		
-		List<CartItemDTO> cartItems;
-		try {
-			cartItems = CartService.INSTANCE.getCartItems(uid);
-			
-			session.setAttribute("count", cartItems.size());
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-
-		
-		response.sendRedirect("/product/list");
 		
 	}
 
 }
-
-
-

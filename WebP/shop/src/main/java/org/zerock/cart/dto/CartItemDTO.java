@@ -9,13 +9,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-
-// cino, uid, pno, aty, 
 public class CartItemDTO {
-	
+
 	private Integer cino;
 	private String uid;
 	private Integer pno;
 	private int qty;
-
+	
 }
