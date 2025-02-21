@@ -38,6 +38,17 @@
 
   }, false)
 
+  todoList.addEventListener("click", e => {
+    const target = e.target
+
+    if(!target || target.tagName !== 'BUTTON'){
+      return
+    }
+
+    console.log(target)
+
+  }, false)
+
 
 </script>
 
