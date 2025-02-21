@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div>
+  <input type="text" name="title" >
+  <button class="addBtn">ADD</button>
+</div>
+
+<div>
+  <ul class="todoList">
+
+  </ul>
+</div>
+
+
+<script type="module">
+  import TodoSerivce from "./todo.js";
+
+  const input = document.querySelector("input[name='title']")
+  const addBtn = document.querySelector(".addBtn")
+  const todoList = document.querySelector(".todoList")
+
+  const service = TodoSerivce()
+
+  addBtn.addEventListener("click", e => {
+    const title = input.value
+
+    const arr = service.add(title)
+
+    const liStr = arr.map( todo => `<li>${todo.tno} - ${todo.title}</li>` ).join("")
+
+    todoList.innerHTML = liStr
+
+  }, false)
+
+
+</script>
+
+</body>
+</html>

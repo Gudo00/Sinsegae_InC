@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<style>
+
+    body{
+        background-color: gainsboro;
+    }
+
+    div{
+        background-color : #535bf2;
+    }
+
+    #d1{
+        background-color: yellowgreen;
+    }
+
+    .card{
+        color:white;
+    }
+
+    input[name='fullName']{
+        margin : 3em;
+    }
+
+    .hiddem {
+        display: none;
+    }
+
+</style>
+
+<script>
+
+    const d1 = document.querySelector('#d1')
+    d1.querySelector("div");
+    const paging = document.querySelector(".paging")
+
+    for(let i = 0; i < 10; i++){
+        str += `<li>AAAAAAAAA ${i}</li>`
+    }
+
+    paging.innerHTML = str
+
+    setTimeout(() => {
+        console.log("aaaaa")
+    },3000)
+
+</script>
+
+<body>
+
+<div id="d1">
+    <div>AAA</div>
+</div>
+
+<div class="card" data-ord="1">BBBBBBBB</div>
+<div class="card">CCCCCCCC</div>
+
+<div>
+    <input type="text" name="fullName">
+</div>
+
+<ul class="paging"></ul>
+
+<script>
+    const paging = document.querySelector(".paging");
+    let str = '';
+
+    for (let i = 0; i < 10; i++) {
+        str += `<li>AAAAAAAAA ${i}</li>`;
+    }
+
+    paging.innerHTML = str;
+
+    setTimeout(() => {
+        console.log("AAAAAAA");
+        paging.classList.add("hidden");
+    }, 3000);
+</script>
+
+</body>
+</html>

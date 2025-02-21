@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    //어디서나 count변수에 접근 가능
+    let count = 1
+
+    function inc() {
+        count += 1
+    }
+
+    function dec(){
+        count -= 1
+    }
+
+
+    //함수안에 함수를 선언하는 이유
+
+    //접근 제한
+
+    //자신을 감싸고 있는 함수의 내용물을 사용할 수 있다
+
+    // 내부를 함수를 외부에 반환해서 사용하면
+    // 상태를 유지할 수 있다. (객체처럼) <---> 전역변수
+
+    function outer() {
+
+        let str = 10 //유지해야 하는 상태
+
+        //상태 데이터를 조작하는 함수
+        function inner() {
+            console.log('inner ' + str)
+            str  += 100
+        }
+
+        console.log('outer')
+
+        return inner
+
+    }
+
+    const result = outer()
+
+    result()
+    result()
+    result()
+
+
+</script>
+
+</body>
+</html>

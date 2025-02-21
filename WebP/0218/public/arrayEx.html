@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    let menus = [
+        {mno: 1, mname: 'Americano', price: 2000, img1: '1.jpg', img2 : '2.jpg', cat:'coffee'},
+        {mno: 2, mname: 'Latte', price: 2900, img1: '2.jpg', img2 : '2.jpg', cat:'coffee'},
+        {mno: 3, mname: 'Espresso', price: 1500, img1: '3.jpg', img2 : '2.jpg', cat:'coffee'},
+        {mno: 4, mname: 'Choco Cake', price: 3500, img1: '4.jpg', img2 : '2.jpg', cat:'cake'},
+        {mno: 5, mname: 'Macadamia Cookie', price: 2000, img1: '5.jpg', img2 : '2.jpg', cat:'cookie'},
+        {mno: 6, mname: 'ChocoChip Cookie', price: 2000, img1: '6.jpg', img2 : '2.jpg', cat:'cookie'}
+    ];
+
+    //CRUD
+    //추가 - push( ),  전개 연산자
+    const m1 =  {mno: 7, mname: 'Financier', price:3000, img1:'6.jpg', img2:'2.jpg', cat:'cookie'}
+
+    //menus.push(m1)
+    //전개 연산자 - 새로운 배열 객체를 만든다
+    // menus = [...menus, m1]
+    //
+    // console.log(menus)
+
+    //중간에 끼워넣기
+    //덮어쓰기
+    // menus[1] = m1
+    // console.log(menus)
+    //menus.splice(1,0, m1) //1번째 위치에 삭제 없이 m1 끼워넣기
+    //console.log(menus)
+
+    //중간 빼기 인덱스 번호 이용 3
+    //menus.splice(3,1)
+    //console.log(menus)
+
+    //필터링하기
+    const targetNum = 5
+    // == 같은지만 비교
+    // === 타입도 비교
+    // const result = menus.filter( (menu) => {
+    //   if(menu.mno === targetNum){
+    //     return false
+    //   }
+    //   return true
+    // })
+
+    const result = menus.filter( (menu) => menu.mno !== targetNum )
+
+    console.log(result)
+
+
+
+</script>
+
+</body>
+</html>

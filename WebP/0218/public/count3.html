@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    //외부 함수
+    function counter() {
+
+        let num = 1
+
+        function change() {
+
+            return num ++ ;
+        }
+
+        return change
+    }
+
+    const c1 = counter()
+
+    const c2 = counter()
+
+    console.log(c1())
+    console.log(c1())
+    console.log("--------------")
+    console.log(c2())
+    console.log(c2())
+
+
+
+</script>
+
+</body>
+</html>

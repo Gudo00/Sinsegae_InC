@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    //P , M
+
+    function calculate(num1, num2 , oper) {
+
+        if(oper === 'P'){
+            return num1 + num2
+        }
+        if(oper === 'M'){
+            return num1 - num2
+        }
+    }
+
+    function calculateLambda(num1, num2 , fn) {
+        console.log("AAAAAAAAAAAAAAAAA")
+        const result =  fn(num1, num2)
+        console.log("BBBBBBBBBBBBBBB")
+        console.log(result)
+    }
+
+    calculateLambda(1,10, (a,b) => a + b)
+    calculateLambda(1,10, (a,b) => a - b)
+    calculateLambda(2,10, (a,b) => Math.pow(a,b))
+
+
+
+
+</script>
+
+</body>
+</html>
