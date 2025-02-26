@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<style>
+    #btn1 {
+        width: 50vw;
+        height: 30vh;
+        background-color: orange;
+        padding: 4em;
+    }
+    #btn2 {
+        width: 20vw;
+        height: 10vh;
+        background-color: blue;
+        padding: 4em;
+    }
+</style>
+
+<div id="btn1">
+    OUTER
+    <div id="btn2">
+        INNER
+    </div>
+</div>
+
+<script>
+
+    // 버블링/캡처링
+
+    document.querySelector("#btn1").addEventListener("click", (event) =>  {
+
+        const target = event.target //이벤트의 주어
+
+        console.log("outer")
+
+    }, false)
+
+    document.querySelector("#btn2").addEventListener("click", (event) =>  {
+
+        const target = event.target //이벤트의 주어
+
+        console.log("inner")
+
+    }, false)
+
+
+
+</script>
+
+</body>
+</html>

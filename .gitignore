@@ -286,6 +286,22 @@ gradle-app.setting
 # Cache of project
 .gradletasknamecache
 
+### react ###
+.DS_*
+*.log
+logs
+**/*.backup.*
+**/*.back.*
+
+node_modules
+bower_components
+
+*.sublime*
+
+psd
+thumb
+sketch
+
 # Eclipse Gradle plugin generated files
 # Eclipse Core
 # JDT-specific (Eclipse Java Development Tools)

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>메뉴 그리드</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 80px; /* 네비게이션바 높이 고려 */
+        }
+    </style>
+</head>
+<body>
+
+<!-- 🟢 네비게이션 바 (카테고리) -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">카테고리</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto cat">
+                <li class="nav-item"><a class="nav-link active" href="">전체</a></li>
+                <li class="nav-item"><a class="nav-link" href="K">한식</a></li>
+                <li class="nav-item"><a class="nav-link" href="C">중식</a></li>
+                <li class="nav-item"><a class="nav-link" href="W">양식</a></li>
+                <li class="nav-item"><a class="nav-link" href="D">디저트</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- 🟢 메뉴 그리드 -->
+<div class="container mt-4">
+    <div class="row">
+
+
+    </div>
+</div>
+
+<!-- 부트스트랩 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    const menus = [
+        {mno:1, mname:'비빔밥', cat:'K', img:'1.jpg'},
+        {mno:2, mname:'불고기', cat:'K', img:'2.jpg'},
+        {mno:3, mname:'돈까스', cat:'W', img:'3.jpg'},
+        {mno:4, mname:'파스타', cat:'W', img:'4.jpg'},
+        {mno:5, mname:'짜장면', cat:'C', img:'5.jpg'},
+        {mno:6, mname:'탕수육', cat:'C', img:'6.jpg'},
+        {mno:7, mname:'치즈케잌', cat:'D', img:'7.jpg'},
+        {mno:8, mname:'아이스크림', cat:'D', img:'8.jpg'},
+    ]
+
+    function filterCategory(cname){
+        const result = menus.filter( m => {
+            if(!cname){
+                return true
+            }
+            return m.cat === cname
+        })
+        printMenu(result)
+    }
+
+    function printMenu(arr){
+
+        const divs = arr.map(m => `
+        <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card">
+                <img src="https://source.unsplash.com/300x200/?korean-food" class="card-img-top" alt="한식">
+                <div class="card-body">
+                    <h5 class="card-title">${m.mname}</h5>
+                    <p class="card-text">신선한 재료로 만든 맛있는 비빔밥</p>
+                    <button class="btn btn-primary">자세히 보기</button>
+                </div>
+            </div>
+        </div>`).join("")
+
+        document.querySelector(".row").innerHTML = divs
+    }
+
+    filterCategory()
+
+    const navbarCollapse = new bootstrap.Collapse(document.querySelector(".navbar-collapse")); // 메뉴 창
+
+    document.querySelector(".cat").addEventListener("click", e => {
+
+        e.preventDefault()
+
+        const target = e.target
+        const catName = target.getAttribute("href")
+
+        filterCategory(catName)
+        navbarCollapse.hide();
+
+
+    }, false)
+    
+</script>
+
+</body>
+</html>

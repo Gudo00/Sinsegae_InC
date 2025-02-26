@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <style>
+        .box{
+            margin: 3em;
+            background-color : #535bf2;
+            font-size : larger;
+            color : white;
+            font-weight : bold;
+            width : 30em;
+            height : 10em;
+        }
+
+    </style>
+
+    <div class = "box" >
+
+        <h3>Hello World</h3>
+
+    </div>
+
+<script>
+
+    // 데이터 정의 (let, const(불면 - 변수의 내용물이 변하지 않음)
+    // 자바와 동일하게 읽기 편함
+
+    const data = {count : 1}
+    const box = document.querySelector(".box")
+
+    // 화면에 출력
+    function render(){
+        box.innerHTML = data.count
+
+    }
+
+    render()
+
+    box.addEventListener("click", e => {
+        data.count += 1;
+        render()
+    }, false)
+
+</script>
+
+</body>
+</html>

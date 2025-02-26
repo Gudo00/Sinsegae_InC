@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Kakao 지도 - 맛집 탐방</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Galmuri', sans-serif;
+            background-color: #f8f1e4;
+            color: #5a3e2b;
+            text-align: center;
+        }
+
+        #map {
+            width: 100vw;
+            height: 50vh;
+            border-bottom: 5px solid #d2691e;
+        }
+
+        .category {
+            list-style: none;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            background: #ffcc99;
+            border-radius: 10px;
+            margin: 20px auto;
+            width: fit-content;
+            box-shadow: 0px 4px 10px rgba(210, 105, 30, 0.8);
+        }
+
+        .category li {
+            padding: 10px 20px;
+            background: #8b4513;
+            color: #fff5e1;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .category li:hover {
+            background: #d2691e;
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0px 4px 10px rgba(139, 69, 19, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div>
+    <ul class="category">
+        <li data-cat="A">전체</li>
+        <li data-cat="S">돼지국밥</li>
+        <li data-cat="N">밀면</li>
+        <li data-cat="C">중국집</li>
+    </ul>
+</div>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=44414baa43e7bd352b9e05126d29a583"></script>
+<script>
+    const container = document.querySelector('#map');
+    const options = {
+        center: new kakao.maps.LatLng(35.170797, 129.114157),
+        level: 7
+    };
+    const map = new kakao.maps.Map(container, options);
+
+    function makeMarker(store) {
+        const {sno, name, lat, lng} = store;
+        const markerPosition = new kakao.maps.LatLng(lat, lng);
+        const marker = new kakao.maps.Marker({ position: markerPosition });
+
+        marker.show = function () { marker.setMap(map); }
+        marker.hide = function () { marker.setMap(null); }
+
+        const iwContent = `<div style="padding:5px;">${sno} - ${name}</div>`;
+        const infowindow = new kakao.maps.InfoWindow({ content: iwContent, removable: true });
+
+        kakao.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map, marker);
+            map.panTo(markerPosition); // 마커 클릭 시 지도 중심 이동
+        });
+
+        store.marker = marker;
+        return store;
+    }
+
+    const stores = [
+        {sno:1, name: '늘해랑', lat: 35.172417, lng: 129.071677, cat:'S'},
+        {sno:2, name: '국제밀면', lat:35.19686, lng: 129.07787, cat:'N'},
+        {sno:3, name: '합천일류돼지국밥', lat: 35.162277, lng: 128.980138, cat:'S'},
+        {sno:4, name: '범일돼지국밥', lat: 35.242739, lng: 129.093678, cat:'S'},
+        {sno:5, name: '미각반점', lat: 35.228885, lng: 129.085024, cat:'C'},
+        {sno:6, name: '수복 돼지국밥', lat: 35.205792, lng: 129.102198, cat:'S'},
+    ];
+
+    const markedStores = stores.map(s => makeMarker(s));
+
+    function showSelectStore(catName) {
+        markedStores.forEach(s => s.marker.hide());
+        markedStores.filter(s => catName === 'A' || s.cat === catName).forEach(s => s.marker.show());
+    }
+
+    document.querySelector('.category').addEventListener("click", e => {
+        const target = e.target;
+        if(target.tagName !== 'LI') { return; }
+        showSelectStore(target.dataset.cat);
+    }, false);
+</script>
+
+</body>
+</html>

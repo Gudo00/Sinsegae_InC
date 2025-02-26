@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<style>
+    .menuContainer {
+        width: 50vw;
+        height: 50vh;
+        background-color: lightblue;
+    }
+    .cartContainer {
+        width: 50vw;
+        height: 50vh;
+        background-color: white;
+    }
+    .outerContainer {
+        display: flex;
+        font-size: large;
+    }
+</style>
+
+<div class="outerContainer">
+    <div class="menuContainer">
+        <ul class="menuList">
+
+        </ul>
+    </div>
+
+    <div class="cartContainer">
+        <ul class="itemList">
+
+        </ul>
+        <hr/>
+        <div class="totalDiv">
+
+        </div>
+    </div>
+</div>
+<script type="module">
+
+    import cart from "./cart.js";
+    import makeMenu, {getCategories,doA} from "./menu.js";
+
+    const cartObj = cart()
+    const menuService = makeMenu()
+    const catArr = getCategories()
+    const menuArr = menuService.getMenus()
+
+    const menuList = document.querySelector('.menuList')
+    const itemList = document.querySelector('.itemList')
+    const totalDiv = document.querySelector('.totalDiv')
+
+    function printMenus(menuArr){
+
+        let str ='';
+
+        str = menuArr.map( menu => `<li data-mno="${menu.mno}">${menu.mname}  ${menu.price}</li>`).join("")
+
+        menuList.innerHTML = str
+    }
+
+    function printCart(arr) {
+        let str ='';
+
+        let total = 0
+
+        str = arr.map( item => {
+
+            total += item.qty * item.price
+
+            return `
+        <li data-mno="${item.mno}">
+        ${item.mname} (${item.price}원) --
+        ${item.qty}개 금액 : ${item.qty * item.price}
+        </li>`
+
+        } ).join("")
+
+        itemList.innerHTML = str
+        totalDiv.innerHTML = total
+
+    }
+
+    menuList.addEventListener('click', e => {
+        const target = e.target
+        if(target.tagName !== 'LI') { return }
+
+        const mno = Number(target.dataset.mno)
+        const targetMenu = menuService.getMenu(mno)
+
+        const currentItems = cartObj.add(targetMenu)
+
+        // 객체 -> JSON 문자열로 만들기
+        const jsonStr = JSON.stringify(currentItems)
+        console.log(jsonStr)
+
+        // JSON -> 객체
+        console.log(JSON.parse(jsonStr))
+
+        printCart(currentItems)
+
+
+    }, false)
+
+    printMenus(menuArr)
+
+</script>
+
+</body>
+</html>

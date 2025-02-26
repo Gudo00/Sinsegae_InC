@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<button class = "btn">GET MOVIES</button>
+
+<ul class = "movieList">
+
+</ul>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script type = "module">
+
+    document.querySelector(".btn").addEventListener("click", e =>{
+        // then( ), catch( ), finally( )
+        // getMovies().then(result => console.log(result))
+        // 콜백 방식 (callback)
+        getMovies((titles) => {console.log(titles)})
+    }, false)
+
+
+    // async는 비동기 함수 선언시에 표시
+    // async 함수의 모든 리턴값은 Promise
+    // async 함수의 내부에서만 await를 이용하여 동기화된 코드를 작성할 수 있다.
+    // 결과적으로는 "then()"이 필요
+    async function getMovies(fn){
+
+        // async 함수 내부에서는 await를 이용할 수 있다.
+        // awiat를 이용하면 비동기 호충을 마치 동기화된 코드처럼 사용 간응
+        const result = await axios.get('http://122.34.51.94:8080/cinema')
+
+        const movies = result.data.Movies.Items
+
+        const titles = movies.map( m => m.MovieNameKR)
+
+        fn(titles)
+
+    }
+
+</script>
+
+</body>
+</html>
