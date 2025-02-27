@@ -8,6 +8,7 @@ import ForEx2 from "./components/count/forEx2.jsx";
 import Count2 from "./components/count2/Count2.jsx";
 import ArrayTest from "./components/count2/ArrayTest.jsx";
 import CountContainer from "./components/count2/CountContainer.jsx";
+import TodoContainer from "./components/todo2/todoContainer.jsx";
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
         {/*<Count2></Count2>*/}
         {/*<ArrayTest></ArrayTest>*/}
         <CountContainer></CountContainer>
+        <TodoContainer></TodoContainer>
 
     </div>
   )
