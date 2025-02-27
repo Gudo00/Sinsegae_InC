@@ -9,6 +9,7 @@ import Count2 from "./components/count2/Count2.jsx";
 import ArrayTest from "./components/count2/ArrayTest.jsx";
 import CountContainer from "./components/count2/CountContainer.jsx";
 import TodoContainer from "./components/todo2/todoContainer.jsx";
+import BtodoContainer from "./components/btodo/btodoContainer.jsx";
 
 function App() {
 
@@ -20,7 +21,7 @@ function App() {
     // }
 
   return (
-    <div className={'m-2 p-2 bg-blue-200 border-2'}>
+      <div className="m-4 p-6 bg-gradient-to-r from-blue-400 to-blue-600 rounded-lg shadow-lg">
         {/*<HelloComponent></HelloComponent>*/}
         {/*<TodoAdd></TodoAdd>*/}
         {/*<TodoList></TodoList>*/}
@@ -29,8 +30,10 @@ function App() {
         {/*<ForEx2></ForEx2>*/}
         {/*<Count2></Count2>*/}
         {/*<ArrayTest></ArrayTest>*/}
-        <CountContainer></CountContainer>
-        <TodoContainer></TodoContainer>
+        {/*<CountContainer></CountContainer>*/}
+
+        {/*<TodoContainer></TodoContainer>*/}
+        <BtodoContainer></BtodoContainer>
 
     </div>
   )
