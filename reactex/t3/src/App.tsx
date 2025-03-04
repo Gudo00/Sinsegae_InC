@@ -2,9 +2,33 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import {getTodo, getTodoList, postTodo, updateTodo} from "./apis/todoApi.tsx";
 
 function App() {
   const [count, setCount] = useState(0)
+
+    const todo:Todo = {title: "React로 생성하는 Todo !", writer:"Gudo"}
+
+    postTodo(todo).then((result:number) => {
+        console.log(result)
+    })
+
+    // updateTodo(252, "React Update 252").then((result:Todo) => {
+    //     console.log(result)
+    // })
+
+    // getTodoList(2,50).then((result: PageResponse<Todo>) => {
+    //     console.log(result)
+    //
+    // })
+
+    // getTodo(252).then((result: Todo) => {
+    //     console.log(result)
+    // }).catch(reason => {
+    //     console.log(reason)
+    // })
+
+
 
   return (
     <>

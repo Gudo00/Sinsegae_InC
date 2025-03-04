@@ -302,6 +302,10 @@ psd
 thumb
 sketch
 
+### IP, API keys###
+reactex/t3/.env
+.api
+
 # Eclipse Gradle plugin generated files
 # Eclipse Core
 # JDT-specific (Eclipse Java Development Tools)
