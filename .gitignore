@@ -304,6 +304,7 @@ sketch
 
 ### IP, API keys###
 reactex/t3/.env
+reactex/t4/.env
 .api
 
 # Eclipse Gradle plugin generated files
