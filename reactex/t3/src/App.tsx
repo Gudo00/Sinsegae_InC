@@ -1,19 +1,25 @@
 
 import './App.css'
 
-import TodoAdd from "./components/todo/todoAdd.tsx";
-import TodoList from './components/todo/todoList.tsx';
+// import TodoAdd from "./components/todo/todoAdd.tsx";
+import TodoList from "./components/todo/todoList.tsx";
 import {useState} from "react";
+import TodoAdd2 from "./components/todo/todoAdd2.tsx";
+import TodoAdd from "./components/todo/todoAdd.tsx";
+
+
 
 function App() {
 
     const [key, setKey] = useState(1)
 
-    const changeKey = () => {
-        setKey(key + 1)
-    }
+    console.log(setKey)
 
-    //const todo:Todo = {title: "React로 생성하는 Todo !", writer:"Gudo"}
+    // const changeKey = () => {
+    //     setKey(key + 1)
+    // }
+
+    //const todo:Todo = {title: "React로 생성하는 Todo", writer:"zerock"}
 
     // postTodo(todo).then((result:number) => {
     //     console.log(result)
@@ -42,8 +48,10 @@ function App() {
 
     return (
         <>
-            <TodoAdd changeKey = {changeKey}/>
-            <TodoList key = {key}></TodoList>
+
+            <TodoAdd2></TodoAdd2>
+            {/*<TodoAdd changeKey = {changeKey}/>*/}
+            <TodoList key={key}></TodoList>
         </>
     )
 }
