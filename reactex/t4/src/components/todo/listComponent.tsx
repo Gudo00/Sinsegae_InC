@@ -1,8 +1,8 @@
-import {useNavigate, useSearchParams} from "react-router";
-import {useEffect, useState} from "react";
-import {getTodoList} from "../../api/todoApi.tsx";
+import { useEffect, useState } from "react";
+import { getTodoList } from "../../api/todoApi.tsx";
 import LoadingComponent from "../common/loadingComponent.tsx";
 import PageComponent from "../common/pageComponent.tsx";
+import useCustomMove from "../../hooks/useCustomMove.tsx";
 
 const initState:PageResponse<Todo> = {
     dtoList: [],
@@ -16,64 +16,48 @@ const initState:PageResponse<Todo> = {
 }
 
 function ListComponent() {
-
-    const [searchParams] = useSearchParams()
-
-    const pageStr:string | null = searchParams.get("page")
-    const page: number = !pageStr ? 1 : Number(pageStr)
-
-    const sizeStr:string | null = searchParams.get("size")
-    const size: number = !sizeStr ? 10 : Number(pageStr)
-
-    const [serverData, setServerData] = useState(initState)
-    const [loading, setLoading] = useState(false)
-
-
-    const navigate = useNavigate()
-
-    const moveListPage = (page:number) => {
-        navigate(`/todo/list?page=${page}`)
-
-    }
+    const [serverData, setServerData] = useState(initState);
+    const { loading, setLoading, refresh, page, size, moveListPage, moveRead } = useCustomMove();
 
     useEffect(() => {
-
-        setLoading(true)
-
-        setTimeout(() => {
-            getTodoList(page,size).then(data => {
-                setServerData(data)
-                setLoading(false)
-            })
-        }, 250)
-    },[page,size])
+        setLoading(true);
+        // setTimeout(() => {
+            getTodoList(page, size).then(data => {
+                setServerData(data);
+                setLoading(false);
+            });
+        // }, 250);
+    }, [page, size, refresh]);
 
     return (
-        <div className="border-2 border-blue-100 mt-10 mr-2 ml-2">
+        <div className="bg-black min-h-screen py-10">
+            <LoadingComponent isLoading={loading} />
 
-            <LoadingComponent isLoading={loading}/>
-
-            <div className="flex flex-wrap mx-auto justify-center p-6">
-                List Component
+            <div className="text-center text-3xl font-bold text-white mb-6">
+                ⚡ Todo List ⚡
             </div>
-            <div>
-                <ul className="w-full max-w-2xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden m-2">
-                    {serverData.dtoList.map(todo =>
+
+            <div className="w-full max-w-3xl mx-auto bg-gray-900 shadow-2xl rounded-xl p-6">
+                <ul className="space-y-4">
+                    {serverData.dtoList.map(todo => (
                         <li
                             key={todo.tno}
-                            className="flex justify-between items-center p-4 border-b last:border-none hover:bg-gray-100"
+                            className="flex justify-between items-center p-4 border-b last:border-none
+                            text-white hover:bg-gray-700 cursor-pointer"
+                            onClick={() => moveRead(todo.tno || 0)}
                         >
-                            <span className="font-medium text-gray-900">{todo.tno}</span>
-                            <span className="text-gray-600">{todo.title}</span>
-                            <span className="text-gray-600">{todo.writer}</span>
-                            <span className="text-gray-500 text-sm">{todo.regDate}</span>
+                            <span className="font-medium">{todo.tno}</span>
+                            <span>{todo.title}</span>
+                            <span>{todo.writer}</span>
+                            <span className="text-sm">{todo.regDate}</span>
                         </li>
-                    )}
+                    ))}
                 </ul>
             </div>
 
-            <PageComponent serverData={serverData} moveListPage={moveListPage}></PageComponent>
-
+            <div className="mt-8">
+                <PageComponent serverData={serverData} moveListPage={moveListPage} />
+            </div>
         </div>
     );
 }

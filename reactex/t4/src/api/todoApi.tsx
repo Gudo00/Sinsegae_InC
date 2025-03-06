@@ -6,14 +6,8 @@ const HOST:string = import.meta.env.VITE_API_SERVER
 
 export async function getTodo(tno: number ): Promise<Todo> {
 
-    try {
-        const res = await axios.get(`${HOST}/${tno}`)
-        return res.data
-    }catch(err) {
-        console.log(err)
-        throw Promise.reject("Data Not Found")
-    }
-
+    const res = await axios.get(`${HOST}/${tno}`)
+    return res.data
 }
 
 export async function getTodoList ( page:number = 1 , size: number = 10  ): Promise<PageResponse<Todo>> {

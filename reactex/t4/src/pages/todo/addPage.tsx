@@ -1,9 +1,10 @@
+import AddComponent from "../../components/common/addComponent.tsx";
 
 function AddPage() {
     return (
-        <div>
-            <div className={'text-4xl'}>
-                Todo Add Page
+        <div className={'mt-3 p-3 bg-blue-200 w-full h-full'}>
+            <div>
+                <AddComponent></AddComponent>
             </div>
         </div>
     );

@@ -6,15 +6,16 @@ interface PageComponentProps<T> {
 
 function PageComponent({ serverData, moveListPage }: PageComponentProps<unknown>) {
     const { page, prev, next, start, end } = serverData;
+
     const pageNumArr = Array.from({ length: end - start + 1 }, (_, i) => start + i);
 
     return (
-        <div className="flex items-center justify-center space-x-4 mt-6 mb-6">
-
+        <div className="flex flex-wrap items-center justify-center space-x-2
+                mt-6 mb-6 p-4 max-w-xl mx-auto bg-black rounded-lg">
             {prev && (
-                <div className="px-6 py-3 bg-blue-800 text-white rounded-lg shadow-lg
-                hover:bg-blue-700 transform transition-all duration-300"
-                     onClick={() => moveListPage(start -1)}>
+                <div className="px-4 py-2 bg-blue-800 text-white rounded-lg shadow-lg
+            hover:bg-blue-700 transition-all duration-300 cursor-pointer"
+                     onClick={() => moveListPage(start - 1)}>
                     이전
                 </div>
             )}
@@ -22,21 +23,20 @@ function PageComponent({ serverData, moveListPage }: PageComponentProps<unknown>
             {pageNumArr.map((num, idx) => (
                 <div
                     key={idx}
-                    className={`px-6 py-3 rounded-lg transition-all duration-300 transform ${
-                        page === num
-                            ? 'bg-blue-900 text-white shadow-2xl scale-110'
-                            : 'bg-gray-800 text-gray-300 hover:bg-blue-600'
-                            + 'hover:text-white hover:scale-110'
-                    }`}
+                    className={`px-4 py-2 rounded-lg cursor-pointer transition-all duration-300
+                ${page === num
+                        ? 'bg-blue-900 text-white shadow-lg scale-110'
+                        : 'bg-gray-800 text-gray-300 hover:bg-blue-600 hover:text-white hover:scale-110'}
+            `}
                     onClick={() => moveListPage(num)}
-                    >
+                >
                     {num}
                 </div>
             ))}
 
             {next && (
-                <div className="px-6 py-3 bg-blue-800 text-white rounded-lg shadow-lg
-                hover:bg-blue-700 transform transition-all duration-300"
+                <div className="px-4 py-2 bg-blue-800 text-white rounded-lg shadow-lg
+            hover:bg-blue-700 transition-all duration-300 cursor-pointer"
                      onClick={() => moveListPage(end + 1)}>
                     다음
                 </div>
