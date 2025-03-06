@@ -1,11 +1,13 @@
+import {useState} from "react";
 
 interface ResultComponentProps {
-    show:boolean,
     msg:string,
     closeFn: () => void
 }
 
-export default function ResultComponent({ show , msg, closeFn } :ResultComponentProps ) {
+export default function ResultComponent({msg, closeFn } :ResultComponentProps ) {
+
+    const [showFlag, setShowFlag] = useState(msg && true)
 
     function getMsg() {
         if(msg === 'D'){
@@ -17,13 +19,13 @@ export default function ResultComponent({ show , msg, closeFn } :ResultComponent
         }
     }
 
-    if (!show) return null;
+    if (!showFlag) return null;
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
              style={{ backgroundColor: 'rgba(169, 169, 169, 0.7)' }}
              onClick={() => {
-
+                 setShowFlag(false)
                  closeFn()
              }}
         >

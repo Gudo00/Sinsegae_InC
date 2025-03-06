@@ -8,32 +8,27 @@ function AddComponent() {
 
     const [todo, setTodo] = useState<Todo>({title:'',writer:''})
 
-    const { moveListPage , loading, setLoading, result, setResult} = useCustomMove()
+    const { moveListPage , loading, setLoading, oper, setOper } = useCustomMove()
 
-    const [msg, setMsg] = useState('')
 
     const handleClick = () => {
 
         setLoading(true)
 
-        setTimeout(()=> {
-            postTodo(todo).then(todoNum => {
-                setLoading(false)
-                setMsg(`New Todo ${todoNum} Added`)
-                setResult(true)
+        postTodo(todo).then(todoNum => {
+            setLoading(false)
+            setOper(`New Todo ${todoNum} Added`)
 
-            })
-        },2000)
+        })
     }
 
     const closeFn = () => {
-        setResult(false)
         moveListPage(1)
     }
 
     return (
         <div className="max-w-lg mx-auto p-6 bg-neutral-900 shadow-2xl rounded-xl text-white border border-gray-700">
-            <ResultComponent show={result} msg={msg} closeFn={closeFn}></ResultComponent>
+            {oper && <ResultComponent msg={oper} closeFn={closeFn}></ResultComponent>}
             <LoadingComponent isLoading={loading}/>
 
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">

@@ -13,50 +13,58 @@ const initState: Todo = {
 };
 
 function ModifyComponent() {
-    const { tno, moveToList, loading, setLoading, result, setResult, moveRead } = useCustomMove();
-    const [todo, setTodo] = useState<Todo>(initState);
+
+    //현재 tno 번호
+    const {tno, moveToList, loading,setLoading, moveRead, oper, setOper}  = useCustomMove()
+
+    const [todo, setTodo] = useState<Todo>(initState)
 
     useEffect(() => {
-        setLoading(true);
-        getTodo(tno).then((data) => {
-            setTodo(data);
-            setLoading(false);
-        });
+        setLoading(true)
+
+        getTodo(tno).then(data => {
+            setTodo(data)
+            setLoading(false)
+        })
+
     }, [tno]);
 
-    const [oper, setOper] = useState("M");
 
-    const handleClickDelete = () => {
-        setLoading(true);
-        setTimeout(() => {
-            deleteTodo(tno).then(() => {
-                setLoading(false);
-                setOper("D");
-                setResult(true);
-            });
-        }, 2000);
-    };
+
+    const handleClickDelete = ()=> {
+
+        setLoading(true)
+
+        deleteTodo(tno).then(() => {
+            setLoading(false)
+            setOper('D')
+        })
+    }
 
     const handleClickModify = () => {
-        setLoading(true);
-        setTimeout(() => {
-            updateTodo(tno, todo.title).then(() => {
-                setLoading(false);
-                setOper("M");
-                setResult(true);
-            });
-        }, 2000);
-    };
 
-    const closeFn = () => {
-        setResult(false);
-        oper === "M" ? moveRead(tno) : moveToList();
-    };
+        setLoading(true)
+
+        updateTodo(tno, todo.title).then(() => {
+            setLoading(false)
+            setOper('M')
+        })
+    }
+
+    const closeFn = () =>  {
+
+        if(oper === 'M') {
+            moveRead(tno)
+        }else {
+            moveToList()
+        }
+
+    }
 
     return (
         <div className="max-w-lg mx-auto p-6 bg-neutral-900 shadow-2xl rounded-xl text-white border border-gray-700">
-            <ResultComponent show={result} msg={oper} closeFn={closeFn} />
-            <LoadingComponent isLoading={loading} />
+            {oper && <ResultComponent msg={oper} closeFn={closeFn}></ResultComponent>}
+            <LoadingComponent isLoading={loading}/>
 
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
                 <span className="text-yellow-400">🛠️</span> Todo Modify Component

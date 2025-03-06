@@ -15,7 +15,8 @@ export default function useCustomMove () {
 
     const [loading, setLoading] = useState(false)
     const [refresh, setRefresh] = useState(false)
-    const [result, setResult] = useState(false)
+
+    const [oper, setOper] = useState('')
 
     const navigate = useNavigate()
     const location = useLocation()
@@ -54,7 +55,7 @@ export default function useCustomMove () {
     }
 
 
-    return {tno, loading,setLoading, result,setResult, refresh, page,size, moveListPage, moveRead, moveToList,moveToModify}
+    return {tno, loading,setLoading, refresh, page,size, oper,setOper, moveListPage, moveRead, moveToList,moveToModify}
 
 
 
