@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.sp1.mapper.BoardMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="bno">
+        insert into tbl_board (title, content, writer)
+        VALUES (#{title}, #{content}, #{writer})
+    </insert>
+
+<!--    <insert id="insert">-->
+
+<!--        <selectKey order="AFTER" keyProperty="bno" resultType="int">-->
+<!--            select last_insert_id()-->
+<!--        </selectKey>-->
+
+<!--        insert into tbl_board (title, content, writer)-->
+<!--        VALUES (#{title}, #{content}, #{writer})-->
+<!--    </insert>-->
+
+    <select id="selectOne" resultType="BoardDTO">
+        select * from tbl_board where bno = #{bno}
+    </select>
+
+    <select id="selectAll" resultType="BoardDTO">
+        select * from tbl_board order by bno desc
+    </select>
+
+    <select id="selectPage" resultType="BoardDTO">
+        select * from tbl_board
+        where bno > 0
+        order by bno desc
+        limit #{limit} offset #{offset}
+    </select>
+
+    <select id="selectCount" resultType="int">
+        select count(*) from tbl_board
+    </select>
+
+    <update id="update">
+        update tbl_board
+        set title= #{title},
+        content = #{content} ,
+        moddate = now()
+        where bno = #{bno}
+    </update>
+
+    <delete id="delete">
+        delete from tbl_board where bno = #{bno}
+    </delete>
+
+</mapper>
+
+
+
+
+
+
+
+
