@@ -1,0 +1,10 @@
+
+spring:
+    datasource:
+        url: jdbc.mariadb://localhost:3305/springdb
+        driver-class-name: org.mariadb.jdbc.Driver
+        username: springdbuser
+        password: springdbuser
+
+server:
+port: 8080
