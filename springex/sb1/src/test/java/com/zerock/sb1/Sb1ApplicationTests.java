@@ -8,6 +8,10 @@ class Sb1ApplicationTests {
 
 	@Test
 	void contextLoads() {
+		log.info("--------------------");
+		log.info("--------------------");
+		log.info("--------------------");
 	}
+
 
 }
