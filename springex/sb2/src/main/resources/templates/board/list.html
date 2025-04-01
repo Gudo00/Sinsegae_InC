@@ -4,39 +4,39 @@
       layout:decorate="~{layout/baseLayout.html}">
 
 <div layout:fragment="content">
-  <div class="card">
-    <div class="card-body">
-        <h5 class="card-title">카드 제목</h5>
-        <p class="card-text">이것은 부트스트랩 카드를 사용하는 예제입니다.</p>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">카드 제목</h5>
+            <p class="card-text">이것은 부트스트랩 카드를 사용하는 예제입니다.</p>
 
-        [[${data}]]
+            [[${data}]]
 
-        
-        <div>
 
-          <ul class="pagination">
-            <li class="page-item" th:if="${data.prev}">
-              <span class="page-link">Previous</span>
-            </li>
+            <div>
 
-            <th:block th:each="num : ${#numbers.sequence(data.start,data.end)}">
-            <li th:class="${num == data.page? 'page-item active':'page-item'}">
-              <a class="page-link" th:href="@{/board/list(page=${num}, size=${requestDTO.size})}">[[${num} ]]</a></li>
-            </th:block>
-  
-            <li class="page-item" th:if="${data.next}">
-              <a class="page-link" href="#">Next</a>
-            </li>
-          </ul>
+                <ul class="pagination">
+                    <li class="page-item" th:if="${data.prev}">
+                        <span class="page-link">Previous</span>
+                    </li>
+
+                    <th:block th:each="num : ${#numbers.sequence(data.start,data.end)}">
+                        <li th:class="${num == data.page? 'page-item active':'page-item'}">
+                            <a class="page-link" th:href="@{/board/list(page=${num}, size=${requestDTO.size}, type=${requestDTO.type} , keyword=${requestDTO.keyword}) }" >[[${num} ]]</a></li>
+                    </th:block>
+
+                    <li class="page-item" th:if="${data.next}">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+
+            </div>
 
         </div>
-
     </div>
-  </div> 
 </div>
 
 <script layout:fragment="script">
 
-  const arr = ['A','B','C']
+    const arr = ['A','B','C']
 
 </script>
