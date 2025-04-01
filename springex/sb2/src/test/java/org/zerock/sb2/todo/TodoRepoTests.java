@@ -34,10 +34,15 @@ public class TodoRepoTests {
   private JPAQueryFactory queryFactory;
 
   @Test
-  public void testSearch1(){
-    Pageable pageable = PageRequest.of(0, 10);
+  public void testSearch1() {
+
+    Pageable pageable = PageRequest.of(0,10);
+
     repository.list1(pageable);
+
   }
+  
+
 
   @Test
   public void testQuery() {
@@ -55,7 +60,7 @@ public class TodoRepoTests {
 
     query.limit(10);
     query.offset(5);
-
+    
     log.info(query);
 
     java.util.List<Todo> entityList = query.fetch();
