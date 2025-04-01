@@ -24,7 +24,7 @@ public class BoardSearchImpl implements BoardSearch {
 
   @Override
   public PageResponseDTO<BoardListDTO> list(PageRequestDTO pageRequestDTO) {
-
+    
     QBoardEntity board = QBoardEntity.boardEntity;
 
     JPQLQuery<BoardEntity> query = queryFactory.selectFrom(board);
@@ -36,7 +36,7 @@ public class BoardSearchImpl implements BoardSearch {
 
     String[] types = pageRequestDTO.getArr(); // ['T','C','W']
 
-    if(types.length > 0 ){
+    if(types != null && types.length > 0 ){
 
       String keyword = pageRequestDTO.getKeyword();
 
@@ -52,24 +52,27 @@ public class BoardSearchImpl implements BoardSearch {
       query.where(builder);
 
     }//end if
+    
+
 
     query.limit(pageRequestDTO.getLimit());
     query.offset(pageRequestDTO.getOffset());
     query.orderBy(new OrderSpecifier<>(Order.DESC, board.bno));
 
     JPQLQuery<BoardListDTO> dtoQuery = query.select(
-            Projections.bean(
-                    BoardListDTO.class,
-                    board.bno, board.title,board.writer, board.regDate, board.viewCnt ));
+      Projections.bean(
+      BoardListDTO.class, 
+           board.bno, board.title,board.writer, board.regDate, board.viewCnt ));
 
     long count = dtoQuery.fetchCount();
-
+    
     java.util.List<BoardListDTO> dtoList = dtoQuery.fetch();
 
     return PageResponseDTO.<BoardListDTO>withAll()
-            .dtoList(dtoList)
-            .total((int)count)
-            .pageRequestDTO(pageRequestDTO)
-            .build();
+    .dtoList(dtoList)
+    .total((int)count)
+    .pageRequestDTO(pageRequestDTO)
+    .build();
   }
+  
 }

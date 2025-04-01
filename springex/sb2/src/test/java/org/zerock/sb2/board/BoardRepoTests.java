@@ -32,12 +32,12 @@ public class BoardRepoTests {
   @Test
   public void testInsert(){
     for (int i = 0; i < 123 ; i++) {
-
+      
       BoardEntity boardEntity = BoardEntity.builder()
-              .title("Test" +i)
-              .content("Test Content "+i)
-              .writer("user" + (i %10))
-              .build();
+      .title("Test" +i)
+      .content("Test Content "+i)
+      .writer("user" + (i %10))
+      .build();
 
       repository.save(boardEntity);
 
@@ -45,3 +45,6 @@ public class BoardRepoTests {
   }
 
 }
+
+
+

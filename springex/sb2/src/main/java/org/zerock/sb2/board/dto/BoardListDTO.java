@@ -12,9 +12,9 @@ public class BoardListDTO {
   private String title;
 
   private String writer;
-
+  
   private LocalDateTime regDate;
-
+  
   private int viewCnt;
-
+  
 }
