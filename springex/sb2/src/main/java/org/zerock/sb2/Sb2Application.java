@@ -9,7 +9,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 public class Sb2Application {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(Sb2Application.class, args);
+	
 	}
 
 }

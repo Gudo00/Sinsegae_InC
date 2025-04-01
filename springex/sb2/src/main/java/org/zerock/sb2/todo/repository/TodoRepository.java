@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.zerock.sb2.todo.dto.TodoDTO;
 import org.zerock.sb2.todo.entities.Todo;
 
-public interface TodoRepository extends JpaRepository<Todo, Long>{
+public interface TodoRepository extends JpaRepository<Todo, Long>, TodoSearch{
 
 
   @Query("select t from Todo t where t.title like %:title% ")//SQL이 아님
