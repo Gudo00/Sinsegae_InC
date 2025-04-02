@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/baseLayout.html}">
+
+<div layout:fragment="content">
+  <div class="card">
+    <div class="card-body">
+        <h5 class="card-title">카드 제목</h5>
+        <p class="card-text">이것은 부트스트랩 카드를 사용하는 예제입니다.</p>
+
+        <form action="/board/register" method="POST">
+          <div class="mb-3">
+              <label for="title" class="form-label">제목</label>
+              <input type="text" class="form-control" id="title" name="title" >
+          </div>
+          <div class="mb-3">
+              <label for="content" class="form-label">내용</label>
+              <textarea class="form-control" id="content" name="content" rows="5" ></textarea>
+          </div>
+          <div class="mb-3">
+              <label for="writer" class="form-label">작성자</label>
+              <input type="text" class="form-control" id="writer" name="writer" >
+          </div>
+          <button type="submit" class="btn btn-primary">제출</button>
+        </form>
+
+    </div>
+  </div> 
+</div>
+
+<script layout:fragment="script" th:inline="javascript">
+
+  const errors = [[ ${errors} ]] //js 객체 
+
+  if(errors){
+    const errorMsg = Object.keys(errors).join(",")
+
+    console.log(errorMsg)
+
+    alert(errorMsg)
+  }
+  
+  
+
+</script>

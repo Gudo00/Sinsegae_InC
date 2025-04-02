@@ -2,6 +2,9 @@ package org.zerock.sb2.board.dto;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
+
 
 import lombok.ToString;
 
@@ -25,6 +28,19 @@ public class PageRequestDTO {
     	buffer.append(getLink());
     	
     	return buffer.toString();
+    	
+    }
+
+    public Map<String, Object> getLinkMap() {
+
+        Map<String, Object> map = new HashMap<>();
+    	
+        if(type != null){
+            map.put("type",type);
+        }
+    	map.put("keyword",keyword);
+		
+    	return map;
     	
     }
     

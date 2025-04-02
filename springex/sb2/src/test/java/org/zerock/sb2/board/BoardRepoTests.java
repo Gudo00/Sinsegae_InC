@@ -22,8 +22,8 @@ public class BoardRepoTests {
   public void testList() {
 
     PageRequestDTO pageRequestDTO = new PageRequestDTO();
-    pageRequestDTO.setType("TCW");
-    pageRequestDTO.setKeyword("11");
+    // pageRequestDTO.setType("TCW");
+    // pageRequestDTO.setKeyword("11");
 
     log.info(repository.list(pageRequestDTO));
 
