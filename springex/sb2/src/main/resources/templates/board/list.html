@@ -4,67 +4,65 @@
       layout:decorate="~{layout/baseLayout.html}">
 
 <div layout:fragment="content">
-  <div class="card">
-    <div class="card-body">
-        <h5 class="card-title">카드 제목</h5>
-        <p class="card-text">이것은 부트스트랩 카드를 사용하는 예제입니다.</p>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">카드 제목</h5>
+            <p class="card-text">이것은 부트스트랩 카드를 사용하는 예제입니다.</p>
 
-        <table class="table table-hover">
-          <thead class="table-light">
-              <tr>
-                  <th>#</th>
-                  <th>제목</th>
-                  <th>작성자</th>
-                  <th>등록일</th>
-                  <th>조회수</th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr th:each="board : ${data.dtoList}">
-                  <td>[[ ${board.bno} ]]</td>
-                  <td>
-                    <a th:href="'/board/read/' + ${board.bno} + ${requestDTO.pageLink}">
-                      [[ ${board.title} ]] 
-                    </a>
-                    <b> [ [[ ${board.replyCnt} ]] ] </b> </td>
-                  <td>홍길동</td>
-                  <td>2024-04-02</td>
-                  <td>120</td>
-              </tr>
-              
-          </tbody>
-      </table>
+            <!-- 게시글 등록 버튼 추가 -->
+            <div class="mb-3 text-end">
+                <a href="/board/register" class="btn btn-primary">글 등록</a>
+            </div>
 
-        
-        <div>
+            <table class="table table-hover">
+                <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>등록일</th>
+                    <th>조회수</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="board : ${data.dtoList}">
+                    <td>[[ ${board.bno} ]]</td>
+                    <td>
+                        <a th:href="'/board/read/' + ${board.bno} + ${requestDTO.pageLink}">
+                            [[ ${board.title} ]]
+                        </a>
+                        <b> [ [[ ${board.replyCnt} ]] ] </b> </td>
+                    <td>홍길동</td>
+                    <td>2024-04-02</td>
+                    <td>120</td>
+                </tr>
+                </tbody>
+            </table>
 
-          <ul class="pagination">
-            <li class="page-item" th:if="${data.prev}" th:with="linkUrl=@{/board/list(page=${data.start -1}, size=${requestDTO.size})}" >
-              <a class="page-link" th:href="${linkUrl + requestDTO.link}" >
-                Previous
-              </a>
-            </li>
+            <div>
+                <ul class="pagination">
+                    <li class="page-item" th:if="${data.prev}" th:with="linkUrl=@{/board/list(page=${data.start -1}, size=${requestDTO.size})}" >
+                        <a class="page-link" th:href="${linkUrl + requestDTO.link}" >
+                            Previous
+                        </a>
+                    </li>
 
-            <th:block th:each="num : ${#numbers.sequence(data.start,data.end)}">
-            <li th:class="${num == data.page? 'page-item active':'page-item'}"
-            th:with="linkUrl=@{/board/list(page=${num}, size=${requestDTO.size})}" 
-            >
-              <a class="page-link" th:href="${linkUrl + requestDTO.link}" >[[${num} ]]</a></li>
-            </th:block>
-  
-            <li class="page-item" th:if="${data.next}" th:with="linkUrl=@{/board/list(page=${data.end + 1}, size=${requestDTO.size})}" >
-              <a class="page-link" th:href="${linkUrl + requestDTO.link}" >Next</a>
-            </li>
-          </ul>
+                    <th:block th:each="num : ${#numbers.sequence(data.start,data.end)}">
+                        <li th:class="${num == data.page? 'page-item active':'page-item'}"
+                            th:with="linkUrl=@{/board/list(page=${num}, size=${requestDTO.size})}"
+                        >
+                            <a class="page-link" th:href="${linkUrl + requestDTO.link}" >[[${num} ]]</a></li>
+                    </th:block>
 
+                    <li class="page-item" th:if="${data.next}" th:with="linkUrl=@{/board/list(page=${data.end + 1}, size=${requestDTO.size})}" >
+                        <a class="page-link" th:href="${linkUrl + requestDTO.link}" >Next</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-
     </div>
-  </div> 
 </div>
 
 <script layout:fragment="script">
-
-  const arr = ['A','B','C']
-
+    const arr = ['A','B','C']
 </script>
