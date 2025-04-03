@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/baseLayout.html}">
+
+<div layout:fragment="content">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Read 제목</h5>
+      <p class="card-text">이것은 부트스트랩 카드를 사용하는 예제입니다.</p>
+
+      <form action="/board/register" method="POST">
+        <div class="mb-3">
+          <label for="title" class="form-label">제목</label>
+          <input type="text" class="form-control" id="title" name="title" >
+        </div>
+        <div class="mb-3">
+          <label for="content" class="form-label">내용</label>
+          <textarea class="form-control" id="content" name="content" rows="5" ></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="writer" class="form-label">작성자</label>
+          <input type="text" class="form-control" id="writer" name="writer" >
+        </div>
+        <button type="submit" class="btn btn-primary">제출</button>
+      </form>
+
+    </div>
+  </div>
+
+  <div class="container mt-5">
+    <div class="card shadow-lg">
+      <div class="card-body">
+        <div class="mb-3">
+          <label for="username" class="form-label">작성자</label>
+          <input type="text" class="form-control" name="replyer" placeholder="이름을 입력하세요" required>
+        </div>
+        <div class="mb-3">
+          <label for="comment" class="form-label">댓글</label>
+          <input class="form-control" name="replyText" rows="3" placeholder="댓글을 입력하세요" required/>
+        </div>
+        <button type="submit" class="btn btn-primary replyAddBtn">댓글 작성</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 댓글 목록 -->
+  <div class="container mt-5">
+    <div class="card shadow-lg">
+      <div class="card-header bg-secondary text-white text-center">
+        <h3>댓글 목록</h3>
+      </div>
+      <div class="card-body ">
+        <ul class="list-group replyList">
+
+        </ul>
+      </div>
+
+      <div class="card-footer">
+        <nav>
+          <ul class="pagination justify-content-center">
+
+          </ul>
+        </nav>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- 모달 -->
+  <div class="modal fade" id="myModal" aria-labelledby="modalTitle">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitle">JavaScript 모달</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="rno" class="form-label">번호</label>
+            <input type="text" id="rno" name="rno" class="form-control" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="replyText" class="form-label">댓글</label>
+            <input type="text" id="replyText" name="replyText" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="replyer" class="form-label">작성자</label>
+            <input type="text" id="replyer" name="replyer" class="form-control" readonly>
+          </div>
+          <div class="d-flex justify-content-between">
+            <button type="button" id="editBtn" class="btn btn-warning">수정</button>
+            <button type="button" id="deleteBtn" class="btn btn-danger">삭제</button>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+          <button type="button" id="confirmBtn" class="btn btn-primary">확인</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<!-- fragment end  -->
+</div>
+
+<script layout:fragment="script" th:inline="javascript">
+
+
+  const myModal = new bootstrap.Modal(document.getElementById('myModal'))
+
+  document.querySelector(".replyAddBtn").addEventListener("click", e=> {
+
+      console.log("click")
+
+      const replyText = document.querySelector("input[name='replyText']").value
+      const replyer = document.querySelector("input[name='replyer']").value
+      const bno = [[${bno}]]
+
+      const replyObj = {bno,replyText,replyer}
+      console.log(replyObj)
+
+      axios.post("http://localhost:8080/replies", replyObj).then(res => {
+          console.log(res.data) //
+          printReplies(res.data)
+      })
+
+
+  }, false)
+
+
+  const replyList = document.querySelector(".replyList")
+
+  let current = 0
+
+  function printReplies(pageData) {
+
+      //댓글 목록 출력
+      const {dtoList} = pageData
+
+      current = pageData.page
+
+      let replyStrArr = []
+
+      if(dtoList){
+          replyStrArr = dtoList.map(replyDTO => `
+              <li class="list-group-item" data-rno=${replyDTO.rno}>
+                <div class="fw-bold">번호: ${replyDTO.rno}</div>
+                <div>댓글 내용: ${replyDTO.replyText}</div>
+                <div>작성자: ${replyDTO.replyer}</div>
+                <div>작성 날짜: ${replyDTO.regDate}</div>
+              </li>
+          `)
+      }
+
+      replyList.innerHTML = replyStrArr.join("")
+
+      //댓글 페이지 처리
+
+      let pageStr = ''
+
+      const {prev, next, start, end, page} = pageData
+
+      if(prev){
+          pageStr += `<li class="page-item"><a class="page-link" href="${start-1}">이전</a></li>`
+      }
+
+      for(let i = start; i <= end; i++){
+          pageStr += `<li class="page-item"><a class="page-link ${page === i? 'active': ''} " href="${i}">${i}</a></li>`
+      }
+
+      if(next){
+          pageStr += `<li class="page-item"><a class="page-link" href="${end +1}">다음</a></li>`
+      }
+
+      document.querySelector(".pagination").innerHTML = pageStr
+  }
+
+
+  document.querySelector(".pagination").addEventListener("click", e => {
+
+      e.preventDefault()
+      e.stopPropagation()
+
+      const target = e.target
+
+      const pageNum = target.getAttribute("href")
+
+      getReplies(pageNum)
+
+  },false)
+
+  const bno = [[${bno}]]
+
+
+  function getReplies(pageNum, last){
+
+
+      const lastStr = last ? '&last=true' :''
+
+      axios.get(`http://localhost:8080/replies/board/${bno}/list?page=${pageNum}${lastStr}`)
+      .then(res => {
+          console.log(res.data) //
+          printReplies(res.data)
+      })
+  }
+
+  getReplies(1,true)
+
+
+  //댓글 조회 및 모달 보이기
+  document.querySelector(".replyList").addEventListener("click", e => {
+
+      const target = e.target
+
+      const targetLi = target.closest("li")
+
+      const divText = targetLi.querySelector("div:nth-child(2)").innerHTML
+
+      if(divText.includes('삭제되었습니다')){
+          alert("삭제된 댓글입니다.")
+          return
+      }
+
+
+      const rno = targetLi.getAttribute("data-rno")
+
+      console.log(target, rno)
+
+      if(!rno){
+          return
+      }
+      //해당 rno 서버에서 조회하고 조회가 되면 모달 창의 내용물 수정하고, 띄우기
+
+      axios.get(`http://localhost:8080/replies/\${rno}`)
+      .then(res => {
+          console.log(res.data)
+
+          const {rno, replyText, replyer} = res.data
+
+          const modal = document.querySelector("#myModal")
+
+          modal.querySelector("input[name='rno']").value = rno
+          modal.querySelector("input[name='replyText']").value = replyText
+          modal.querySelector("input[name='replyer']").value = replyer
+
+
+          myModal.show()
+      })
+
+  },false)
+
+  document.querySelector("#editBtn").addEventListener("click", e => {
+
+      e.preventDefault()
+      e.stopPropagation()
+
+      const modal = document.querySelector("#myModal")
+
+      const rno = modal.querySelector("input[name='rno']").value
+      const replyText = modal.querySelector("input[name='replyText']").value
+      const replyer = modal.querySelector("input[name='replyer']").value
+
+      const replyObj = {rno, replyText, replyer}
+
+      console.log(replyObj)
+
+      axios.put(`http://localhost:8080/replies/\${rno}`, replyObj)
+      .then(res => {
+          console.log(res.data)
+          getReplies(current)
+          myModal.hide()
+
+      })
+
+  }, false)
+
+
+  document.querySelector("#deleteBtn").addEventListener("click", e => {
+
+      e.preventDefault()
+      e.stopPropagation()
+
+      const modal = document.querySelector("#myModal")
+      const rno = modal.querySelector("input[name='rno']").value
+
+      axios.delete(`http://localhost:8080/replies/\${rno}`)
+      .then(res => {
+          console.log(res.data)
+          getReplies(current)
+          myModal.hide()
+      })
+
+  },false)
+
+
+
+
+</script>

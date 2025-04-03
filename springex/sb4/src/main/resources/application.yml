@@ -2,8 +2,6 @@
 
 #Connection pool 
 spring:
-  thymeleaf:
-    cache: false
   datasource:
     url: jdbc:mariadb://localhost:3305/bootdb
     driver-class-name: org.mariadb.jdbc.Driver
@@ -32,5 +30,4 @@ spring:
 logging:
   level:
     org.zerock.sb2: INFO
-
 
