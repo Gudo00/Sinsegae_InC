@@ -125,10 +125,9 @@
 
       axios.post("http://localhost:8080/replies", replyObj).then(res => {
           console.log(res.data) //
-          printReplies(res.data)
+          //printReplies(res.data)
+          window.location.reload();
       })
-
-
   }, false)
 
 
@@ -197,8 +196,7 @@
 
 
   function getReplies(pageNum, last){
-
-
+  
       const lastStr = last ? '&last=true' :''
 
       axios.get(`http://localhost:8080/replies/board/${bno}/list?page=${pageNum}${lastStr}`)
@@ -235,7 +233,7 @@
       }
       //해당 rno 서버에서 조회하고 조회가 되면 모달 창의 내용물 수정하고, 띄우기
 
-      axios.get(`http://localhost:8080/replies/\${rno}`)
+      axios.get(`http://localhost:8080/replies/${rno}`)
       .then(res => {
           console.log(res.data)
 
