@@ -5,14 +5,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.zerock.sb7.board.domain.Board;
+import org.zerock.sb7.board.repo.search.BoardSearch;
 
-public interface BoardRepo extends JpaRepository<Board, Integer> {
+public interface BoardRepo extends JpaRepository<Board, Integer>, BoardSearch {
 
     @Query("select b.bno, b.title, b.writer , bi.fileName, count(f) " +
             " from Board b " +
             " left join b.images bi "+
             " left join Favorite f on f.board = b " +
-            " where bi.ord = 0 "+
+            " where bi.ord = 0 " +
+            " and f.choice = org.zerock.sb7.board.domain.Choice.LIKE "+
             " group by b")
     Page<Object[]> listOfPage(Pageable pageable);
 

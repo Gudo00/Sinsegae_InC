@@ -10,11 +10,11 @@ spring:
     username: api1dbuser
     password: api1dbuser
     hikari:
-      maximum-pool-size: 5   # ?? ??? ??
-      minimum-idle: 2         # ?? ?? ??? ??
-      idle-timeout: 30000     # ???? ?? ??? ???? ?? ?? (???)
-      max-lifetime: 1800000   # ???? ?? ???? (???)
-      connection-timeout: 2000 # ??? ?? ? ?? ?? ?? (???)
+      maximum-pool-size: 5   # 최대 커넥션 개수
+      minimum-idle: 2         # 최소 유휴 커넥션 개수
+      idle-timeout: 30000     # 커넥션이 유휴 상태로 유지되는 최대 시간 (밀리초)
+      max-lifetime: 1800000   # 커넥션의 최대 생명주기 (밀리초)
+      connection-timeout: 2000 # 커넥션 요청 시 최대 대기 시간 (밀리초)
 
   #JPA Config
   jpa:
@@ -28,7 +28,7 @@ spring:
     init:
       mode: never
 
-#?? ??
+#로그 설정
 logging:
   level:
     org.zerock: INFO
