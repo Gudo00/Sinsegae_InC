@@ -1,11 +1,10 @@
-package org.zerock.sb7.board.repo.search;
+package org.zerock.sb7.board.service;
 
 import org.zerock.sb7.board.dto.BoardListDTO;
 import org.zerock.sb7.board.dto.PageRequestDTO;
 import org.zerock.sb7.board.dto.PageResponseDTO;
 
-public interface BoardSearch {
+public interface BoardService {
 
-    PageResponseDTO<BoardListDTO> search(PageRequestDTO pageRequestDTO);
-
+    PageResponseDTO<BoardListDTO> list(PageRequestDTO pageRequestDTO);
 }

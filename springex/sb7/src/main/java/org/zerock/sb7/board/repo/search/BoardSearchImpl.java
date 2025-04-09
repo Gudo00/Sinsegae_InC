@@ -13,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.zerock.sb7.board.domain.*;
 import org.zerock.sb7.board.dto.BoardListDTO;
+import org.zerock.sb7.board.dto.PageRequestDTO;
+import org.zerock.sb7.board.dto.PageResponseDTO;
 import org.zerock.sb7.board.repo.BoardRepo;
 
 import java.util.List;
@@ -25,15 +27,15 @@ public class BoardSearchImpl implements BoardSearch {
     private final JPQLQueryFactory queryFactory;
 
     @Override
-    public void search() {
+    public PageResponseDTO<BoardListDTO> search(PageRequestDTO pageRequestDTO) {
 
         log.info("---------------------------");
         log.info("Searching for boards");
 
         //1st query - paging 쿼리 - 검색 조건으로 동적으로 만들어지는 쿼리
         //나중에 실제 검색조건으로 페이징 처리를 해야 함
-        int limit = 10;
-        int offset = 0;
+        int limit = pageRequestDTO.getLimit();
+        int offset = pageRequestDTO.getOffset();
 
         QBoard board = QBoard.board;
         QFavorite favorite = QFavorite.favorite;
@@ -58,16 +60,18 @@ public class BoardSearchImpl implements BoardSearch {
 
         JPQLQuery<BoardListDTO> dtoQuery = query.select(
                 Projections.bean(BoardListDTO.class,
-                        board.bno,
-                        board.title,
-                        board.writer,
-                        boardImage.fileName,
-                        favorite.choice.eq(Choice.LIKE).countDistinct().as("favoriteCount"),
-                        reply.countDistinct().as("replyCount")
+                board.bno,
+                board.title,
+                board.writer,
+                boardImage.fileName,
+                favorite.choice.eq(Choice.LIKE).countDistinct().as("favoriteCount"),
+                reply.countDistinct().as("replyCount")
                 )
         );
 
-        log.info(dtoQuery.fetch());
+        List<BoardListDTO> dtoList = dtoQuery.fetch();
+
+        int total = (int)dtoQuery.fetchCount();
 
 
 //
@@ -80,6 +84,11 @@ public class BoardSearchImpl implements BoardSearch {
 //
 //        log.info("Found {} boards", bnos);
 
+        return PageResponseDTO.<BoardListDTO>withAll()
+                .dtoList(dtoList)
+                .total(total)
+                .pageRequestDTO(pageRequestDTO)
+                .build();
 
     }
 }

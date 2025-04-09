@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.sb7.board.domain.Board;
 import org.zerock.sb7.board.domain.Reply;
+import org.zerock.sb7.board.dto.PageRequestDTO;
 import org.zerock.sb7.board.repo.BoardRepo;
 import org.zerock.sb7.board.repo.FavoriteRepo;
 import org.zerock.sb7.board.repo.ReplyRepo;
@@ -104,7 +105,9 @@ public class BoardTests {
     @Test
     public void testQuerydsl() {
 
-        boardRepo.search();
+        PageRequestDTO pageRequestDTO = new PageRequestDTO();
+
+        boardRepo.search(pageRequestDTO);
 
     }
 

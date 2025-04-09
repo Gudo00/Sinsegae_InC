@@ -28,7 +28,7 @@ spring:
     init:
       mode: never
 
-#로그 설정
+#?? ??
 logging:
   level:
     org.zerock: INFO
