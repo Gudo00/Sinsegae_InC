@@ -64,4 +64,6 @@ logging:
     org.zerock: INFO
     org.springframework.security: TRACE
 
-
+org:
+  zerock:
+    upload: upload

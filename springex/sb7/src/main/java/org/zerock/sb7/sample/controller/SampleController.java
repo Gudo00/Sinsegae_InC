@@ -1,22 +1,28 @@
 package org.zerock.sb7.sample.controller;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.zerock.sb7.member.dto.MemberDTO;
 import org.zerock.sb7.sample.controller.dto.SampleDTO;
+import org.zerock.sb7.sample.dto.SampleUploadDTO;
+import org.zerock.sb7.util.FileUploadUtil;
 
 import java.util.List;
 
 @Controller
 @RequestMapping("/sample")
 @Log4j2
+@RequiredArgsConstructor
 public class SampleController {
+
+    private final FileUploadUtil fileUploadUtil;
 
     //permitAll
 
@@ -61,4 +67,46 @@ public class SampleController {
         log.info("exDTO");
         log.info(dto);
     }
+
+    @GetMapping("ex5")
+    public void ex5(){
+
+    }
+    @PostMapping("exUpload")
+    public void exUpload(SampleUploadDTO uploadDTO, Model model){
+
+        try {
+            List<String> uploadedNames = fileUploadUtil.uploadFiles(uploadDTO.getFiles());
+
+            log.info("upload result");
+            log.info(uploadedNames);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
+        log.info("exUpload");
+    }
+
+    @GetMapping("ex6/{fileName}")
+    public void ex6(@PathVariable String fileName){
+
+        fileUploadUtil.deleteFile(fileName);
+
+
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
