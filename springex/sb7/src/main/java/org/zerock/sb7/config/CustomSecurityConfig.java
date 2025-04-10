@@ -13,6 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.zerock.sb7.security.handler.CustomAccessDeniedHandler;
+import org.zerock.sb7.security.handler.CustomLoginSuccessHandler;
 
 import javax.sql.DataSource;
 
@@ -30,7 +32,8 @@ public class CustomSecurityConfig {
         log.info("------------------Security Config-----------------------");
 
         http.formLogin(config -> {
-           //config.loginPage("/login");
+           config.loginPage("/member/login");
+           config.successHandler(new CustomLoginSuccessHandler());
         });
 
         http.rememberMe(config -> {
@@ -40,6 +43,12 @@ public class CustomSecurityConfig {
         });
 
         http.csrf(config -> { config.disable();});
+
+        http.oauth2Login(config -> {});
+
+        http.exceptionHandling(config -> {
+            config.accessDeniedHandler(new CustomAccessDeniedHandler());
+        });
 
         return http.build();
     }

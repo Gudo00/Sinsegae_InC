@@ -6,5 +6,5 @@ import org.zerock.sb7.board.dto.PageResponseDTO;
 
 public interface BoardService {
 
-    PageResponseDTO<BoardListDTO> list(PageRequestDTO pageRequestDTO);
+    PageResponseDTO<BoardListDTO> list(PageRequestDTO pageRequestDTO, boolean withDetails);
 }

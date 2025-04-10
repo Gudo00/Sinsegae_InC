@@ -20,7 +20,7 @@ public class BoardServiceTests {
     @Test
     public void testListBoards() {
 
-        PageResponseDTO<BoardListDTO> result = boardService.list(new PageRequestDTO());
+        PageResponseDTO<BoardListDTO> result = boardService.list(new PageRequestDTO(),false);
 
         result.getDtoList().forEach(board -> log.info(board));
 

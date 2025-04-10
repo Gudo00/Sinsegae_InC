@@ -28,48 +28,49 @@ public class BoardServiceImpl implements BoardService {
     private final ReplyRepo replyRepo;
 
     @Override
-    public PageResponseDTO<BoardListDTO> list(PageRequestDTO pageRequestDTO) {
+    public PageResponseDTO<BoardListDTO> list(PageRequestDTO pageRequestDTO, boolean withDetail) {
 
         PageResponseDTO<BoardListDTO> result = boardRepo.search(pageRequestDTO);
 
-        List<Integer> bnos  = result.getDtoList().stream().map(dto -> dto.getBno()).collect(Collectors.toUnmodifiableList());
+        if(withDetail) {
+            List<Integer> bnos = result.getDtoList().stream().map(dto -> dto.getBno()).collect(Collectors.toUnmodifiableList());
 
-        List<Object[]> etcInfos = replyRepo.listOfBnos(bnos);
+            List<Object[]> etcInfos = replyRepo.listOfBnos(bnos);
 
-        etcInfos.stream().forEach(arr -> {
+            etcInfos.stream().forEach(arr -> {
 
-            Reply reply = (Reply) arr[0];
-            Board board = (Board) arr[1];
-            List<String> tags = board.getTags();
-            List<String> images = board.getImages().stream().map(boardImage -> boardImage.getFileName()).toList();
+                Reply reply = (Reply) arr[0];
+                Board board = (Board) arr[1];
+                List<String> tags = board.getTags();
+                List<String> images = board.getImages().stream().map(boardImage -> boardImage.getFileName()).toList();
 
-            log.info("-----------------------------");
-            log.info(reply);
-            log.info(board);
-            log.info(tags);
-            log.info(images);
-            log.info("================================");
-
-
-            BoardListDTO target = result.getDtoList().stream()
-                    .filter(dto -> dto.getBno().equals(board.getBno()))
-                    .findFirst().get();
-
-            ReplyDTO replyDTO = ReplyDTO.builder()
-                    .rno(reply.getRno())
-                    .str(reply.getStr())
-                    .mid(reply.getMid())
-                    .bno(board.getBno())
-                    .build();
-
-            target.addReplyDTO(replyDTO);
-
-            target.setTags(tags);
-            target.setImages(images);
+//                log.info("-----------------------------");
+//                log.info(reply);
+//                log.info(board);
+//                log.info(tags);
+//                log.info(images);
+//                log.info("================================");
 
 
-        });
+                BoardListDTO target = result.getDtoList().stream()
+                        .filter(dto -> dto.getBno().equals(board.getBno()))
+                        .findFirst().get();
 
+                ReplyDTO replyDTO = ReplyDTO.builder()
+                        .rno(reply.getRno())
+                        .str(reply.getStr())
+                        .mid(reply.getMid())
+                        .bno(board.getBno())
+                        .build();
+
+                target.addReplyDTO(replyDTO);
+
+                target.setTags(tags);
+                target.setImages(images);
+
+
+            });
+        }
         return result;
     }
 }
