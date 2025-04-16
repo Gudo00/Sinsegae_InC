@@ -4,20 +4,46 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.zerock.sb2.member.service.MemberService;
+import org.zerock.sb2.util.JWTUtil;
+
+import java.util.Map;
 
 @RestController
 @Log4j2
 @RequiredArgsConstructor
 public class SocialController {
 
+    private final MemberService memberService;
+
+    private final JWTUtil jwtUtil;
+
+    @PostMapping("/api/v1/member/login")
+    public ResponseEntity<String[]> login (@RequestParam("uid") String uid,@RequestParam("upw") String upw) {
+
+        log.info("login----------------------------");
+        log.info(uid + " " + upw);
+
+        //사용자 정보를 조회 생략
+
+        String accessToken = jwtUtil.createToken(Map.of("uid",uid), 5);
+        String refreshToken = jwtUtil.createToken(Map.of("uid",uid), 10); //60*24*7
+
+        String[] result = new String[]{accessToken, refreshToken};
+
+        return ResponseEntity.ok(result);
+    }
+
+
     @GetMapping("/api/v1/member/kakao")
     public ResponseEntity<String[]> getKakao( @RequestParam("accessToken") String accessToken) {
 
         log.info("getKakao: " + accessToken);
+
+        String kakaoEmail = memberService.getKakaoEmail(accessToken);
+
+        log.info("kakaoEmail: " + kakaoEmail);
 
         String[] result = new String[]{"access.........", "refresh............."};
 
