@@ -22,7 +22,10 @@ public class JWTCheckFilter extends OncePerRequestFilter {
 
     public enum JWTErrorCode {
 
-        NO_ACCESS_TOKEN(401, "No access token");
+        NO_ACCESS_TOKEN(401, "No access token"),
+        EXPIRED_TOKEN(401, "Expired token"),
+        BAD_SIGNATURE(401, "Bad signature"),
+        MALFORMED_TOKEN(401, "Malformed token");
 
         private int code;
         private String message;
@@ -45,6 +48,11 @@ public class JWTCheckFilter extends OncePerRequestFilter {
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
 
         log.info("------shouldNotFilter---------");
+
+        if(request.getServletPath().startsWith("/api/v1/member/")) {
+            return true;
+        }
+
         //부정의 부정 -> 긍정
         return false;
     }
@@ -65,9 +73,24 @@ public class JWTCheckFilter extends OncePerRequestFilter {
             handleException(response, JWTErrorCode.NO_ACCESS_TOKEN);
             return;
         }
+        String accessToken = headerStr.substring(7);
 
+        try {
+            jwtUtil.validateToken(accessToken);
+            filterChain.doFilter(request, response);
 
-        filterChain.doFilter(request, response);
+        } catch (Exception e) {
+            log.error("===========================");
+            String message = e.getMessage();
+            if(message.startsWith("JWT signature")){
+                handleException(response, JWTErrorCode.BAD_SIGNATURE);
+            }else if(message.startsWith("Malformed")){
+                handleException(response, JWTErrorCode.MALFORMED_TOKEN);
+            }else if(message.startsWith("JWT expired")){
+                handleException(response, JWTErrorCode.EXPIRED_TOKEN);
+            }
+        }
+
     }
 
     private void handleException(HttpServletResponse response, JWTErrorCode errorCode) throws IOException {
