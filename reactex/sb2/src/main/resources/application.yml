@@ -4,10 +4,10 @@ spring:
   thymeleaf:
     cache: false
   datasource:
-    url: jdbc:mariadb://localhost:3305/bootdb
+    url: jdbc:mariadb://localhost:3305/api1db
     driver-class-name: org.mariadb.jdbc.Driver
-    username: bootdbuser
-    password: bootdbuser
+    username: api1dbuser
+    password: api1dbuser
     hikari:
       maximum-pool-size: 5   # 최대 커넥션 개수
       minimum-idle: 2         # 최소 유휴 커넥션 개수
