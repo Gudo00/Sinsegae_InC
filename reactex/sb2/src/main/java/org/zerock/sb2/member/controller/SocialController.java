@@ -48,6 +48,23 @@ public class SocialController {
         String[] result = new String[]{"access.........", "refresh............."};
 
         return ResponseEntity.ok(result);
-
     }
+
+    @RequestMapping("/api/v1/member/refresh")
+    public ResponseEntity<String[]> refresh (
+            @RequestHeader("Authorization") String accessTokenStr,
+            @RequestParam("refreshToken") String refreshToken) {
+
+        String accessToken = accessTokenStr.substring(7);
+        String uid = "user00";
+
+        String newAccessToken = jwtUtil.createToken(Map.of("uid",uid), 5);
+        String newRefreshToken = jwtUtil.createToken(Map.of("uid",uid), 10); //60*24*7
+
+        String[] result = new String[]{newAccessToken, newRefreshToken};
+
+        return ResponseEntity.ok(result);
+    }
+
+
 }

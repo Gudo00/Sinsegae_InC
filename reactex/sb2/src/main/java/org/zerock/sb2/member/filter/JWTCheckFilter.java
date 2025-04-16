@@ -69,7 +69,7 @@ public class JWTCheckFilter extends OncePerRequestFilter {
         log.info("headerStr: " + headerStr);
 
         //Access Token이 없는 경우
-        if (headerStr == null || !headerStr.startsWith("Bearer ")) {
+        if (headerStr == null || headerStr.contains("undefined") || !headerStr.startsWith("Bearer ")) {
             handleException(response, JWTErrorCode.NO_ACCESS_TOKEN);
             return;
         }
@@ -90,6 +90,8 @@ public class JWTCheckFilter extends OncePerRequestFilter {
                 handleException(response, JWTErrorCode.EXPIRED_TOKEN);
             }
         }
+
+
 
     }
 
