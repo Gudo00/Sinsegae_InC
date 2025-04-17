@@ -21,7 +21,7 @@ import java.util.List;
 @PreAuthorize("permitAll()")
 public class TodoController {
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("list")
     public ResponseEntity<List<TodoDTO>> list1(){
 
