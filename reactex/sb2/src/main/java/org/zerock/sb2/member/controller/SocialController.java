@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.zerock.sb2.member.service.MemberService;
+import org.zerock.sb2.util.JWTException;
 import org.zerock.sb2.util.JWTUtil;
 
 import java.util.Map;
@@ -57,6 +58,14 @@ public class SocialController {
 
         String accessToken = accessTokenStr.substring(7);
         String uid = "user00";
+
+        try {
+            jwtUtil.validateToken(refreshToken);
+        }catch(Exception e){
+            log.error("refresh token validation failed", e);
+
+            throw new JWTException(e.getMessage());
+        }
 
         String newAccessToken = jwtUtil.createToken(Map.of("uid",uid), 5);
         String newRefreshToken = jwtUtil.createToken(Map.of("uid",uid), 10); //60*24*7

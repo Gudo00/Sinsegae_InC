@@ -21,22 +21,23 @@ import java.util.List;
 @PreAuthorize("permitAll()")
 public class TodoController {
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("list")
     public ResponseEntity<List<TodoDTO>> list1(){
 
         List<TodoDTO> list
                 = List.of(
-                        TodoDTO.builder()
-                                .tno(10L)
-                                .title("title10")
-                                .writer("writer10")
-                                .build(),
-                        TodoDTO.builder()
-                            .tno(9L)
-                            .title("title9")
-                            .writer("writer9")
-                            .build()
-                );
+                TodoDTO.builder()
+                        .tno(10L)
+                        .title("title10")
+                        .writer("writer10")
+                        .build(),
+                TodoDTO.builder()
+                        .tno(9L)
+                        .title("title9")
+                        .writer("writer9")
+                        .build()
+        );
 
         try {
             Thread.sleep(1000);
@@ -65,8 +66,8 @@ public class TodoController {
         }
 
         return ResponseEntity.ok(ActionResultDTO.<Long>builder()
-                        .result("success")
-                        .data(10L)
+                .result("success")
+                .data(10L)
                 .build());
 
     }

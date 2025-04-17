@@ -7,11 +7,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.zerock.sb2.member.security.CustomUserPrincipal;
 import org.zerock.sb2.util.JWTUtil;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 @Component
 @Log4j2
@@ -76,7 +82,20 @@ public class JWTCheckFilter extends OncePerRequestFilter {
         String accessToken = headerStr.substring(7);
 
         try {
-            jwtUtil.validateToken(accessToken);
+            Map<String, Object> tokenMap = jwtUtil.validateToken(accessToken);
+
+            String uid = (String) tokenMap.get("uid");
+
+            UsernamePasswordAuthenticationToken authenticationToken =
+                    new UsernamePasswordAuthenticationToken(
+                            new CustomUserPrincipal(uid),
+                            null,
+                            List.of(new SimpleGrantedAuthority("ROLE_USER")));
+
+            //스프링 시큐리티 컨텍스트에 추가
+            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+
+
             filterChain.doFilter(request, response);
 
         } catch (Exception e) {
