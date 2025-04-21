@@ -29,7 +29,7 @@ public class CustomSecurityConfig {
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 
-        log.info("-------------configure-------");
+        log.info("-------------configure-------------");
 
         http.cors(cors -> {
             cors.configurationSource(corsConfigurationSource());

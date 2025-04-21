@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model tbl_todo {
+  tno     Int       @id @default(autoincrement())
+  moddate DateTime? @db.DateTime(6)
+  regdate DateTime? @db.DateTime(6)
+  title   String    @db.VarChar(300)
+  writer  String?   @db.VarChar(255)
+}
