@@ -127,7 +127,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\eveis\\IdeaProjects\\reactex\\n1\\app\\generated\\prisma",
+      "value": "C:\\reactex\\n1\\app\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -141,7 +141,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\eveis\\IdeaProjects\\reactex\\n1\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\reactex\\n1\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
